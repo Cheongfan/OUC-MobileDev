@@ -1,0 +1,31 @@
+<view class="container" style="padding-top: {{headerPaddingTop}}px;">
+  <!-- 全局背景图：完全铺满全屏，绝不留白区 -->
+  <image class="bg-image" src="/images/a.png" mode="aspectFill"></image>
+
+  <!-- 1. 顶部深色磨砂导航栏 -->
+  <view class="custom-nav" style="padding-top: {{navTop}}px; height: {{navHeight}}px;">
+    <text class="nav-title">实验1：第一个小程序</text>
+  </view>
+
+  <!-- 2. 头部卡片（头像与问候语） -->
+  <view class="header-card {{loaded ? 'animate-enter delay-1' : 'init-hide'}}">
+    <view class="avatar-box">
+      <image class="avatar-img" src="/images/2.png" mode="aspectFill"></image>
+    </view>
+    <text class="title">你好，世界！</text>
+    <!-- 修正后的纯正摩斯电码 -->
+    <text class="morse-code">... . . / -.-- --- ..- / - --- -- --- .-. .-. --- .--</text>
+  </view>
+
+  <!-- 3. 毛玻璃内容卡片 -->
+  <view class="content-card {{loaded ? 'animate-enter delay-2' : 'init-hide'}}">
+    <text class="message-text">{{message}}</text>
+    <text class="counter-text">累计点击按钮：<text class="highlight">{{count}}</text> 次</text>
+  </view>
+
+  <!-- 4. 按钮组 -->
+  <view class="btn-group {{loaded ? 'animate-enter delay-3' : 'init-hide'}}">
+    <button class="btn btn-primary" bindtap="changeText">切换问候语</button>
+    <button class="btn btn-warn" bindtap="resetAll">重置状态</button>
+  </view>
+</view>
