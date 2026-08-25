@@ -1,0 +1,247 @@
+/* ==================== 1. 容器与背景设置 ==================== */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30rpx 30rpx 140rpx 30rpx;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: transparent;
+  }
+  
+  /* 还原背景原图：移除 scale 放大，降至极其微弱的 blur(1rpx) */
+  .bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    /* 极其轻微的意思意思模糊，保留原图清晰度与尺寸 */
+    /*filter: blur(1rpx);*/
+  }
+  
+  /* ==================== 2. 头部卡片与头像 ==================== */
+  .header-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10rpx;
+    margin-bottom: 30rpx;
+  }
+  
+  /* 适应 aspectFit 的头像容器 */
+  .avatar {
+    width: 130rpx;
+    height: 130rpx;
+    border-radius: 50%;
+    margin-bottom: 16rpx;
+    border: 4rpx solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.2); /* 浅色底衬托原图全貌 */
+  }
+  
+/* 主标题：深桑葚紫，对比鲜明、优雅清晰 */
+/* ==================== 头部与头像重构 ==================== */
+
+.header-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10rpx;
+    margin-bottom: 25rpx;
+  }
+  
+  /* 1. 头像包裹盒：深色内描边 + 重度悬浮暗影，撕开与粉白背景的粘连 */
+  .avatar-box {
+    position: relative;
+    width: 140rpx; /* 控制外框大小 */
+    height: 140rpx;
+    border-radius: 50%;
+    margin-bottom: 20rpx;
+    /* 核心 1：暗桑葚紫内边框，斩断同色系融边 */
+    border: 5rpx solid #ec9cec;
+    /* 核心 2：立体双重阴影（深色光晕推远背景 + 浅色外发光增加精致感） */
+    box-shadow: 0 12rpx 30rpx rgba(230, 190, 228, 0.45), 
+                0 0 0 6rpx rgba(238, 214, 236, 0.7);
+    background: #2e1a29; /* 衬底色，防止未加载时透白 */
+    overflow: hidden;
+  }
+  
+  /* 2. 头像图片本身：保持 aspectFill + 滤镜提亮 */
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    /* 核心 3：色采滤镜，让宝蓝色眼睛和粉嫩脸颊瞬间醒目 */
+    filter: saturate(1.18) contrast(1.08) brightness(1.02);
+    /* 核心 4：在 aspectFill 基础上的适度缩放（如果觉得脸太大，可以改小如 0.98，觉得脸小可以改成 1.1） */
+    transform: scale(1.0); 
+  }
+  
+  /* 3. 标题与摩斯电码样式 */
+  .title {
+    font-size: 36rpx;
+    color: #22323d;
+    font-weight: bold;
+    letter-spacing: 4rpx;
+    text-shadow: 0 2rpx 10rpx rgba(255, 255, 255, 0.9), 
+                 0 0 20rpx rgba(255, 255, 255, 0.8);
+    margin-top: 0rpx;
+  }
+  
+  .morse-code {
+    font-size: 20rpx;
+    color: #430d30;
+    font-weight: 600;
+    letter-spacing: 6rpx;
+    opacity: 0.85;
+    text-shadow: 0 2rpx 8rpx rgba(255, 255, 255, 0.9);
+  }
+  
+  /* ==================== 3. 核心毛玻璃卡片 ==================== */
+  .content-card {
+    width: 88%;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(25rpx);
+    -webkit-backdrop-filter: blur(25rpx);
+    border: 2rpx solid rgba(255, 255, 255, 0.75);
+    border-radius: 32rpx;
+    padding: 23rpx 15rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 16rpx 40rpx rgba(31, 38, 135, 0.1);
+    margin-bottom: 540rpx;
+  }
+  
+  .message-text {
+    font-size: 38rpx;
+    color: #2e3a59;
+    font-weight: bold;
+    margin-bottom: 10rpx;
+    text-align: center;
+    letter-spacing: 1rpx;
+  }
+  
+  .counter-text {
+    font-size: 26rpx;
+    color: #5a6b8c;
+  }
+  
+  .highlight {
+    color: #e11d48;
+    font-weight: bold;
+    font-size: 30rpx;
+  }
+  
+  /* ==================== 4. 按钮组（保持避让底部LOGO） ==================== */
+  .btn-group {
+    width: 85%;
+    margin-bottom: 150rpx;
+  }
+  
+/* ==================== 高级磨砂玻璃按钮组 ==================== */
+
+.btn {
+    margin-bottom: 26rpx;
+    border-radius: 50rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    letter-spacing: 4rpx;
+    border: none !important;
+    transition: all 0.3s ease;
+  }
+  
+  /* 主按钮（切换问候语）：深池夜蓝 + 水面高光边框 */
+  .btn-primary {
+    /* 45% 半透明深灰蓝，透出背景水色 */
+    background: rgba(35, 56, 65, 0.75) !important;
+    color: #f0f4f8 !important;
+    /* 核心：高斯模糊 */
+    backdrop-filter: blur(15rpx);
+    -webkit-backdrop-filter: blur(15rpx);
+    /* 顶部白色微光边框，模拟水滴/玻璃质感 */
+    border: 2rpx solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.25),
+                inset 0 2rpx 4rpx rgba(255, 255, 255, 0.4) !important;
+    transform: translateY(-60rpx);
+  }
+  
+  /* 次按钮（重置状态）：睡莲暗粉镂空幽灵按钮 (Ghost Button) */
+  .btn-warn {
+    /* 15% 极其微弱的暗红衬底 */
+    background: rgba(180, 60, 80, 0.35) !important;
+    color: #f7d6de !important;
+    backdrop-filter: blur(15rpx);
+    -webkit-backdrop-filter: blur(15rpx);
+    /* 优雅的粉白细边框 */
+    border: 2rpx solid rgba(247, 214, 222, 0.45) !important;
+    box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.15) !important;
+    margin-top: 100rpx;
+    transform: translateY(-140rpx);
+  }
+  
+  /* ==================== 5. 防抽搐动画逻辑 ==================== */
+  .header-card, .content-card, .btn-group {
+    will-change: transform, opacity;
+  }
+  
+  .init-hide {
+    opacity: 0 !important;
+    transform: translateY(60rpx) scale(0.94) !important;
+  }
+  
+  @keyframes silkySlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(60rpx) scale(0.94);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  .animate-enter {
+    animation: silkySlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.35s; }
+
+  /* 自定义顶部导航栏定位 */
+.custom-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* 背景完全透明，透出背后的花树 */
+  }
+  
+  /* 顶部标题：自由调整字号、颜色与发光阴影 */
+  .nav-title {
+    font-size: 32rpx; /* 可自由修改字号，如 30rpx、34rpx */
+    font-weight: bold;
+    color: #3d2235; /* 配合深桑葚紫/暗梅红，与下方“你好世界”同配色 */
+    letter-spacing: 2rpx; /* 增加字间距 */
+    text-shadow: 0 2rpx 10rpx rgba(255, 255, 255, 0.9),
+                 0 0 20rpx rgba(255, 255, 255, 0.8);
+  }
+  
+  /* 注意：因为顶部加了固定定位的导航栏，调整 container 的上内边距，防止内容重叠 */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 160rpx 30rpx 140rpx 30rpx; /* 将顶部的 30rpx 增大为 160rpx */
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: transparent;
+  }
