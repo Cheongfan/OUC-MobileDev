@@ -9,7 +9,7 @@
 ---
 
 ### 博客与开源代码链接
-* **CSDN 博客链接**：[填写你的 CSDN 博客文章网址]
+* **CSDN 博客链接**：https://cheongfan.github.io/
 * **GitHub 仓库链接**：https://github.com/Cheongfan/OUC-MobileDev
 
 ---
@@ -22,39 +22,39 @@
 ## 二、 实验内容
 **实验主线**：从**基础的工具安装与空白项目搭建**开始，先落实实验要求的 **“Hello World 动态文本切换”逻辑**，随后以此为骨架，进行界面美化、动画渲染以及沉浸式交互的拓展，逐步形成一个 **简单却高完成度的单页小程序**。
 
-### 1. 从零起步：环境搭建
+### 1、从零起步：环境搭建
 实验第一步是下载并安装官方微信开发者工具，其过程记录如下。
 
 微信开发者工具的版本发布页链接：https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html 
 
 选择合适的操作系统版本进行安装稳定版：
-![alt text](resources/0.png)
+![ ](resources/0.png)
 
 双击运行安装包：
 
-![alt text](resources/1.png)
+![ ](resources/1.png)
 
 安装过程省略，选择合适的盘符和文件夹即可。
 
 启动开发工具，点击创建项目：
-![alt text](resources/2.png)
+![ ](resources/2.png)
 
 修改项目名称，**同步修改项目目录名单**，避免以后认不出来（因为这里微信工具不会自动帮你改），然后点击“测试号”获取测试号，模板选择在“全部分类”中找到“不使用模板”即可：
 
-![alt text](resources/3.png)
+![ ](resources/3.png)
 
 进入开发界面后，左边是项目目录，下方是终端（本实验用不到），右边是模拟运行的手机界面。
 
 
-### 2. 筑基：落实实验基本要求
+### 2、筑基：落实实验基本要求
 
-**(1). 实验思路**
+#### （1）、 实验思路
 
 本实验对代码的基本要求是简单且确定的：实现一个能够点击按钮修改页面文字的经典 Hello World 小程序，体会 WXML 与 JS 的数据绑定机制。
 
 为实现这一功能并为后续实验打下基础，这里需要学习一下 WeChat Mini Program 的项目结构：
 
-![alt text](resources/4.png)
+![ ](resources/4.png)
 
 由于本人在之前学习过前端三件套（`HTML`+`CSS`+`JS`）的相关知识，因此以网页前端的视角对微信小程序的项目结构进行解释：
 
@@ -68,13 +68,13 @@
 
 结合以上理解可知，本实验只需要在 `pages` 中创建一个页面，使其能够完成文本的渲染和切换任务即可。
 
-**(2).实验过程**
+#### （2）、实验过程
 
 我在 `pages/index/` 目录下手动建齐了 `index.wxml`、`index.wxss`、`index.js` 和 `index.json` 四个文件，分管**结构、样式、逻辑与局部配置**。
 
 经过合理的前端设计，本实验的初稿效果如下：
 
-![alt text](resources/5.png)
+![ ](resources/5.png)
 
 下面是具体实现：
 
@@ -245,7 +245,7 @@ Page({
 }
 ```
 
-### 3. 提高：突出“出色完成”的创意设计
+### 3、提高：突出“出色完成”的创意设计
 在完成了基础的点击切换功能后，我发现默认的白底黑字界面过于单调。为了追求更好的视觉效果与交互质感，我决定通过完善背景与用户头像、优化UI质感来提升视觉效果，在基础功能之上追加了以下创意设计：
 
 #### （1）、基于暗黑奇幻风格的樱花水池壁纸为背景
@@ -347,11 +347,11 @@ Page({
 #### （5）、锁死单页体验与水色磨砂按钮
 为了避免页面在手机上产生上下误滑动或左右拉出白边的现象，我在 `index.json` 中配置了 `"disableScroll": true`，并在 CSS 中锁死了横向溢出。在底部按钮的设计上，我摒弃了原生的红蓝强对比色，改用深池夜蓝半透明玻璃与睡莲暗粉镂空幽灵按钮（Ghost Button），使整个界面和谐划一。
 
-### 4. 落地：完整工程代码展示
+### 4、落地：完整工程代码展示
 
 经过上述从“基本要求”到“创意设计”的演进，本实验落地的完整工程代码如下：
 
-#### 配置文件：全局 `app.json` 与 页面 `index.json`
+#### （1）、配置文件：全局 `app.json` 与 页面 `index.json`
 `app.json` 控制全局隐藏原生导航栏；`index.json` 开启页面级禁止滑动。
 ```json
 // app.json
@@ -375,7 +375,7 @@ Page({
 }
 ```
 
-#### 逻辑层：页面 `pages/index/index.js`
+#### （2）、逻辑层：页面 `pages/index/index.js`
 包含基础的 `greetings` 数组、点击计数 `changeText`、重置 `resetAll`，以及为了创意设计追加的胶囊计算与动画控制 `loaded`。
 ```javascript
 Page({
@@ -442,7 +442,7 @@ Page({
 });
 ```
 
-#### 视图层：页面 `pages/index/index.wxml`
+#### （3）、视图层：页面 `pages/index/index.wxml`
 采用了全屏背景、自定义导航栏、头像框、毛玻璃卡片与按钮组结构。
 ```xml
 <view class="container" style="padding-top: {{headerPaddingTop}}px;">
@@ -477,7 +477,7 @@ Page({
 </view>
 ```
 
-#### 样式层：全局 `app.wxss` 与 页面 `index.wxss`
+#### （4）、样式层：全局 `app.wxss` 与 页面 `index.wxss`
 ```css
 /* app.wxss */
 .container {
@@ -688,14 +688,14 @@ page {
 ```
 
 最终效果：
-![alt text](resources/6.png)
-![alt text](resources/7.png)
+![ ](resources/6.png)
+![ ](resources/7.png)
 
 完整可运行代码将放在个人Github仓库中：https://github.com/Cheongfan/OUC-MobileDev 。
 
 ---
 
-## 二、 问题总结与体会
+## 三、 问题总结与体会
 
 在本次小程序的搭建与视觉重构过程中，我遇到了不少预料之外的细节问题。排查和解决这些问题的经历，让我对前端渲染与小程序底层机制有了更切实的体会。
 
