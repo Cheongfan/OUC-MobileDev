@@ -222,24 +222,30 @@ saveContact() {
 
 #### (1). 视觉效果
 
-![ ](resources/6.png)
+<p align="center">
+  <img src="resources/6.png" width="55%" />
+</p>
 
 #### (2). 复制功能
 
-![ ](resources/7.png)
-
+<p align="center">
+  <img src="resources/7.png" width="55%" />
+</p>
 #### (3). 定位与导航功能
 
-![ ](resources/8.png)
-
+<p align="center">
+  <img src="resources/8.png" width="55%" />
+</p>
 #### (4). 通讯录保存功能
 
-![ ](resources/9.png)
-
+<p align="center">
+  <img src="resources/9.png" width="55%" />
+</p>
 #### (5). 分享功能
 
-![ ](resources/10.png)
-
+<p align="center">
+  <img src="resources/10.png" width="55%" />
+</p>
 ---
 
 ## 三、 问题总结与体会
