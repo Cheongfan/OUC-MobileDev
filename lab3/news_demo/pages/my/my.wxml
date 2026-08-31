@@ -1,0 +1,47 @@
+<view class="my-container">
+  <!-- 1. 渐变个人信息头部 -->
+  <view class="profile-header">
+    <block wx:if="{{isLogin}}">
+      <view class="avatar-box">
+        <image class="avatar" src="{{src}}" mode="aspectFill"></image>
+      </view>
+      <text class="nickname">{{nickName}}</text>
+      
+      <!-- 💡 新增：退出登录按钮 -->
+      <button class="logout-btn" bindtap="logout">退出登录</button>
+    </block>
+    
+    <button wx:else class="login-btn" bindtap="getUserInfo">点击一键登录</button>
+  </view>
+
+  <!-- 2. 收藏列表区域 -->
+  <view class="favorite-section">
+    <!-- 保持原有的收藏列表和空状态代码不变... -->
+    <view class="section-header">
+      <view class="section-title">
+        <view class="title-bar"></view>
+        <text class="title-text">我的收藏</text>
+        <text class="count-badge">({{number}})</text>
+      </view>
+    </view>
+
+    <view class="news-list" wx:if="{{isLogin && number > 0}}">
+      <view class="news-item" wx:for="{{newsList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+        <image src="{{item.poster}}" mode="aspectFill"></image>
+        <view class="news-info">
+          <view class="news-title">{{item.title}}</view>
+          <view class="news-meta">
+            <text class="news-tag">{{item.category || '已收藏'}}</text>
+            <text class="news-date">{{item.add_date}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-card" wx:else>
+      <text class="empty-icon">📁</text>
+      <text wx:if="{{!isLogin}}" class="empty-text">登录后可查看和管理收藏的新闻</text>
+      <text wx:else class="empty-text">暂无收藏的新闻，快去首页看看吧</text>
+    </view>
+  </view>
+</view>

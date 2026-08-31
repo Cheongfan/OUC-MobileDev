@@ -1,0 +1,46 @@
+<view class="index-container">
+  <!-- 1. 吸顶 Tab 分类栏 -->
+  <scroll-view scroll-x class="tab-bar" scroll-with-animation>
+    <view wx:for="{{categories}}" wx:key="index" 
+          class="tab-item {{currentTab === index ? 'active' : ''}}" 
+          bindtap="switchTab" data-index="{{index}}">
+      <text>{{item}}</text>
+      <view class="tab-line" wx:if="{{currentTab === index}}"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 2. 动态绑定前3条新闻的轮播图 -->
+  <view class="swiper-wrapper">
+    <swiper indicator-dots="true" autoplay="true" interval="5000" duration="500" 
+            indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#ffffff" circular>
+      <block wx:for="{{swiperImg}}" wx:key="id">
+        <!-- 💡 绑定点击事件与 data-id，点击直接跳转该新闻详情 -->
+        <swiper-item bindtap="goToDetail" data-id="{{item.id}}">
+          <image src="{{item.poster}}" mode="aspectFill" class="swiper-img"></image>
+          <!-- 💡 轮播图底部半透明标题遮罩 -->
+          <view class="swiper-title-box">
+            <text class="swiper-title">{{item.title}}</text>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 3. 卡片新闻列表 -->
+  <view class="news-list">
+    <view class="news-item" wx:for="{{displayNewsList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <image src="{{item.poster}}" mode="aspectFill"></image>
+      <view class="news-info">
+        <view class="news-title">{{item.title}}</view>
+        <view class="news-meta">
+          <text class="news-tag">{{item.category || '海大动态'}}</text>
+          <text class="news-date">{{item.add_date}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-tip" wx:if="{{displayNewsList.length === 0}}">
+      <text>暂无相关新闻资讯</text>
+    </view>
+  </view>
+</view>

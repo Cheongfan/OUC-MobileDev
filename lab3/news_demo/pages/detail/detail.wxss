@@ -1,0 +1,89 @@
+.container {
+  padding: 30rpx 24rpx;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 38rpx;
+  line-height: 54rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: justify;
+  margin-bottom: 24rpx;
+}
+
+.poster {
+  width: 100%;
+  margin: 20rpx 0;
+}
+
+.poster image {
+  width: 100%;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.08);
+}
+
+.content {
+  margin-top: 30rpx;
+}
+
+.content text {
+  font-size: 30rpx;
+  line-height: 52rpx;
+  color: #333333;
+  text-align: justify;
+}
+
+.add_date {
+  font-size: 26rpx;
+  color: #888888;
+  text-align: right;
+  margin-top: 40rpx;
+  margin-bottom: 40rpx;
+}
+
+.action-box {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50rpx;
+  padding-bottom: 40rpx;
+}
+
+button.btn-fav, button.btn-share {
+  width: 280rpx !important;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 42rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
+}
+
+button.btn-fav {
+  border: 2rpx solid #328EEB;
+  color: #328EEB;
+  background: #ffffff;
+}
+
+button.faved {
+  border-color: #ff4d4f;
+  color: #ff4d4f;
+  background: #fff0f0;
+}
+
+button.btn-share {
+  border: 2rpx solid #07c160;
+  color: #07c160;
+  background: #ffffff;
+}
+
+.error-tip {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999999;
+  font-size: 28rpx;
+}

@@ -1,0 +1,27 @@
+<view class="container">
+  <!-- 判定只有拿到文章标题才渲染，防止空白卡片 -->
+  <block wx:if="{{article.title}}">
+    <view class="title">{{article.title}}</view>
+    
+    <view class="poster" wx:if="{{article.poster}}">
+      <image src="{{article.poster}}" mode="widthFix"></image>
+    </view>
+    
+    <view class="content">
+      <text>{{article.content}}</text>
+    </view>
+    
+    <view class="add_date">发布时间：{{article.add_date}}</view>
+    
+    <view class="action-box">
+      <button wx:if="{{isAdd}}" class="btn-fav faved" plain bindtap="cancelFavorites">❤️ 已收藏</button>
+      <button wx:else class="btn-fav" plain bindtap="addFavorites">🤍 点击收藏</button>
+      <button class="btn-share" plain open-type="share">转发好友</button>
+    </view>
+  </block>
+
+  <!-- 数据未找到时的提示 -->
+  <view class="error-tip" wx:else>
+    <text>新闻加载失败或不存在</text>
+  </view>
+</view>
