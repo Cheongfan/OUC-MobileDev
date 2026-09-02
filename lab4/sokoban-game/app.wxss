@@ -1,0 +1,55 @@
+page {
+  background-color: #241c18;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+/* 彻底解决所有按键文本垂直偏下/不居中的全局 Reset */
+button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  line-height: normal !important;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20rpx;
+}
+
+.pixel-card {
+  background: #362a22;
+  border: 4rpx solid #5a4535;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 0px #17110e;
+  padding: 24rpx;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+}
+
+.pixel-btn-gold {
+  background: #f7b731 !important;
+  color: #241c18 !important;
+  font-weight: bold;
+  border: 4rpx solid #eb9b16 !important;
+  box-shadow: 0 6rpx 0px #886010 !important;
+  border-radius: 12rpx;
+}
+
+.pixel-btn-gray {
+  background: #4a3828 !important;
+  color: #dcdde1 !important;
+  font-weight: bold;
+  border: 4rpx solid #5a4535 !important;
+  box-shadow: 0 6rpx 0px #17110e !important;
+  border-radius: 12rpx;
+}
