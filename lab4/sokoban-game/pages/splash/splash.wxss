@@ -1,0 +1,114 @@
+.splash-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: radial-gradient(circle at center, #2b2b2b 0%, #111111 100%);
+  padding: 80rpx 40rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.bg-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: 40rpx 40rpx;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.logo-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100rpx;
+  z-index: 10;
+}
+
+.game-logo {
+  width: 220rpx;
+  height: 220rpx;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 10rpx 20rpx rgba(0,0,0,0.8));
+}
+
+.animate-pop {
+  animation: logoPulse 2s infinite ease-in-out;
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.game-name {
+  font-size: 28pt;
+  font-weight: bold;
+  color: #ffb830;
+  text-shadow: 6rpx 6rpx 0px #000;
+  margin-top: 30rpx;
+}
+
+.game-tag {
+  font-size: 10pt;
+  color: #888888;
+  letter-spacing: 4rpx;
+  margin-top: 10rpx;
+}
+
+.loading-area {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24rpx;
+  background-color: #333;
+  border: 4rpx solid #555;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #ffb830, #ff7875);
+  transition: width 0.1s linear;
+}
+
+.loading-tips {
+  font-size: 10pt;
+  color: #aaa;
+  margin-top: 20rpx;
+}
+
+.enter-area {
+  width: 80%;
+  z-index: 10;
+}
+
+.enter-btn {
+  width: 100% !important;
+  height: 100rpx;
+  line-height: 90rpx;
+  font-size: 14pt;
+}
+
+.pulse {
+  animation: btnPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes btnPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.splash-footer {
+  font-size: 8pt;
+  color: #555;
+  z-index: 10;
+}

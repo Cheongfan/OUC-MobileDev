@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="title">🏆 微信好友排行榜</view>
+
+  <view class="pixel-card rank-card">
+    <view class="rank-item {{item.isMe ? 'is-me' : ''}}" wx:for="{{rankList}}" wx:key="index">
+      <view class="rank-num">
+        <!-- 直接读取您导入的 rank 文件夹奖牌图标 -->
+        <image class="medal-img" wx:if="{{index === 0}}" src="/images/rank/icon_gold.png" mode="aspectFit"></image>
+        <image class="medal-img" wx:elif="{{index === 1}}" src="/images/rank/icon_silver.png" mode="aspectFit"></image>
+        <image class="medal-img" wx:elif="{{index === 2}}" src="/images/rank/icon_bronze.png" mode="aspectFit"></image>
+        <text wx:else>{{index + 1}}</text>
+      </view>
+      
+      <view class="avatar-box">{{item.avatar}}</view>
+      
+      <view class="user-info">
+        <view class="name">
+          {{item.name}} 
+          <text class="me-tag" wx:if="{{item.isMe}}">我</text>
+        </view>
+        <view class="sub">通关进度: {{item.completedCount}} / 9 关</view>
+      </view>
+
+      <view class="star-badge">⭐ {{item.stars}}</view>
+    </view>
+  </view>
+</view>

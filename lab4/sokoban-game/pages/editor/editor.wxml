@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="title">🛠️ 地图编辑器</view>
+  
+  <!-- 画板 -->
+  <view class="canvas-area">
+    <canvas canvas-id="editorCanvas" class="editorCanvas" bindtouchstart="onCanvasTap"></canvas>
+  </view>
+
+  <!-- 刷子调色盘 -->
+  <view class="palette">
+    <view class="palette-item {{currentBrush === 1 ? 'active' : ''}}" bindtap="selectBrush" data-brush="{{1}}">🧱 墙体</view>
+    <view class="palette-item {{currentBrush === 4 ? 'active' : ''}}" bindtap="selectBrush" data-brush="{{4}}">📦 箱子</view>
+    <view class="palette-item {{currentBrush === 3 ? 'active' : ''}}" bindtap="selectBrush" data-brush="{{3}}">🎯 目标</view>
+    <view class="palette-item {{currentBrush === 5 ? 'active' : ''}}" bindtap="selectBrush" data-brush="{{5}}">👤 主角</view>
+    <view class="palette-item {{currentBrush === 2 ? 'active' : ''}}" bindtap="selectBrush" data-brush="{{2}}">🧹 橡皮</view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="btn-row">
+    <button class="pixel-btn-gray" bindtap="clearMap">清空</button>
+    <button class="pixel-btn-gold" bindtap="validateAndSave">校验并保存</button>
+  </view>
+</view>

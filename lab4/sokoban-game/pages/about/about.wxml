@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="title">⚙️ 设置与反馈</view>
+
+  <!-- 1. 系统设置 -->
+  <view class="pixel-card setting-box">
+    <view class="setting-row">
+      <view class="label">游戏按键音效</view>
+      <switch checked="{{soundEnabled}}" bindchange="toggleSound"/>
+    </view>
+    <view class="setting-row" bindtap="clearData">
+      <view class="label">重置本地游戏存档</view>
+      <view class="arrow">➔</view>
+    </view>
+  </view>
+
+  <!-- 2. 意见反馈表单 (提交按钮绝对居中) -->
+  <view class="pixel-card feedback-box">
+    <view class="fb-title">📝 意见反馈 (最小10字)</view>
+    <textarea class="fb-textarea" placeholder="描述您遇到的问题或改进建议..." bindinput="onFbInput" value="{{fbText}}"/>
+    
+    <!-- 居中包裹容器 -->
+    <view class="fb-btn-wrapper">
+      <button class="pixel-btn-gold submit-fb-btn" bindtap="submitFeedback">提交反馈</button>
+    </view>
+  </view>
+
+  <view class="footer">推箱子大冒险 v1.0.5 Pixel Dark Wood Edition</view>
+</view>

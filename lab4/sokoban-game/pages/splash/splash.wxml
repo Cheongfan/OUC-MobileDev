@@ -1,0 +1,24 @@
+<view class="splash-container">
+  <view class="bg-grid"></view>
+
+  <view class="logo-box {{logoReady ? 'animate-pop' : ''}}">
+    <image class="game-logo" src="/images/player/player_01.png" mode="aspectFit"></image>
+    <view class="game-name">推箱子大冒险</view>
+    <view class="game-tag">SOKOBAN RETRO ARCADE</view>
+  </view>
+
+  <!-- 动态资源加载进度条 -->
+  <view class="loading-area" wx:if="{{!isLoaded}}">
+    <view class="progress-bar">
+      <view class="progress-inner" style="width: {{progress}}%;"></view>
+    </view>
+    <view class="loading-tips">正在加载像素资源与系统引擎... {{progress}}%</view>
+  </view>
+
+  <!-- 加载完毕可点击进入 -->
+  <view class="enter-area" wx:else>
+    <button class="pixel-btn-gold enter-btn pulse" bindtap="enterHome">点击按键 开启冒险</button>
+  </view>
+
+  <view class="splash-footer">Powered by WeChat Mini Program Canvas 2D</view>
+</view>

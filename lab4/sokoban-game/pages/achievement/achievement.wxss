@@ -1,0 +1,12 @@
+.container { min-height: 100vh; background: #241c18; padding: 24rpx; }
+.title { font-size: 16pt; font-weight: bold; color: #f7b731; margin-bottom: 24rpx; text-align: center; }
+.ach-card { background: #362a22; border: 4rpx solid #5a4535; border-radius: 12rpx; padding: 20rpx; margin-bottom: 20rpx; display: flex; align-items: center; }
+.ach-card.locked { opacity: 0.6; filter: grayscale(90%); }
+.ach-icon { font-size: 24pt; margin-right: 20rpx; }
+.ach-body { flex: 1; }
+.ach-name { font-size: 11pt; font-weight: bold; color: #f7b731; }
+.ach-desc { font-size: 8pt; color: #a4b0be; margin: 4rpx 0 10rpx 0; }
+.ach-progress-bar { width: 100%; height: 12rpx; background: #17110e; border-radius: 6rpx; overflow: hidden; }
+.fill { height: 100%; background: #2ed573; }
+.ach-target-text { font-size: 7pt; color: #888; margin-top: 4rpx; }
+.ach-status-badge { font-size: 8pt; font-weight: bold; color: #f7b731; margin-left: 10rpx; }

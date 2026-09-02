@@ -1,0 +1,84 @@
+.container { 
+  min-height: 100vh; 
+  background: #241c18; 
+  padding: 24rpx; 
+  box-sizing: border-box;
+}
+
+.title { 
+  font-size: 16pt; 
+  font-weight: bold; 
+  color: #f7b731; 
+  margin-bottom: 24rpx; 
+  text-align: center; 
+}
+
+.setting-box { 
+  background: #362a22; 
+  border: 4rpx solid #5a4535; 
+  padding: 10rpx 24rpx; 
+  margin-bottom: 24rpx; 
+}
+
+.setting-row { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 24rpx 0; 
+  border-bottom: 2rpx solid #4a3828; 
+  font-size: 11pt; 
+  color: #fff; 
+}
+
+.setting-row:last-child {
+  border-bottom: none;
+}
+
+.arrow { color: #888; }
+
+.feedback-box { 
+  background: #362a22; 
+  border: 4rpx solid #5a4535; 
+  padding: 24rpx; 
+}
+
+.fb-title { 
+  font-size: 11pt; 
+  font-weight: bold; 
+  color: #f7b731; 
+  margin-bottom: 16rpx; 
+}
+
+.fb-textarea { 
+  width: 100%; 
+  height: 180rpx; 
+  background: #17110e; 
+  border: 2rpx solid #5a4535; 
+  color: #fff; 
+  padding: 16rpx; 
+  box-sizing: border-box; 
+  margin-bottom: 24rpx; 
+  border-radius: 8rpx; 
+  font-size: 9.5pt; 
+}
+
+/* 按钮居中样式 */
+.fb-btn-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.submit-fb-btn {
+  width: 70% !important;
+  height: 70rpx !important;
+  font-size: 10.5pt !important;
+  margin: 0 auto !important;
+}
+
+.footer { 
+  font-size: 8pt; 
+  color: #666; 
+  text-align: center; 
+  margin-top: 40rpx; 
+}

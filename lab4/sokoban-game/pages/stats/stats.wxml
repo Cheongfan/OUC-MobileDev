@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="title">📊 个人数据仪表盘</view>
+
+  <view class="pixel-card progress-card">
+    <view class="card-label">经典模式通关进度</view>
+    <view class="progress-bar-box">
+      <!-- 绑定安全的 progressStyle 样式 -->
+      <view class="progress-fill" style="{{stats.progressStyle}}"></view>
+    </view>
+    <view class="progress-text">{{stats.completedCount}} / 9 关卡已通关 ({{stats.progressPercent}}%)</view>
+  </view>
+
+  <view class="stats-grid">
+    <view class="pixel-card grid-item">
+      <view class="item-icon">👣</view>
+      <view class="item-val">{{stats.totalSteps}}</view>
+      <view class="item-lbl">总探索步数</view>
+    </view>
+
+    <view class="pixel-card grid-item">
+      <view class="item-icon">⭐</view>
+      <view class="item-val">{{stats.totalStars}} / 27</view>
+      <view class="item-lbl">星级评价数</view>
+    </view>
+
+    <view class="pixel-card grid-item">
+      <view class="item-icon">🌟</view>
+      <view class="item-val">{{stats.threeStarCount}}</view>
+      <view class="item-lbl">三星完美通关数</view>
+    </view>
+
+    <view class="pixel-card grid-item">
+      <view class="item-icon">↩️</view>
+      <view class="item-val">{{stats.undoCount}}</view>
+      <view class="item-lbl">累计悔棋次数</view>
+    </view>
+
+    <view class="pixel-card grid-item">
+      <view class="item-icon">⏱️</view>
+      <view class="item-val">{{stats.bestTimeStr}}</view>
+      <view class="item-lbl">最佳通关耗时</view>
+    </view>
+
+    <view class="pixel-card grid-item">
+      <view class="item-icon">🛠️</view>
+      <view class="item-val">{{stats.customMapCount}}</view>
+      <view class="item-lbl">创作自定义地图</view>
+    </view>
+  </view>
+</view>

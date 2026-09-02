@@ -1,0 +1,163 @@
+<view class="container">
+  <!-- 1. 用户卡片 -->
+  <view class="pixel-card user-card">
+    <block wx:if="{{isLoggedIn}}">
+      <view class="user-top-row">
+        <view class="avatar-container" bindtap="openEditNickname">
+          <image class="user-avatar" src="/images/player/player_01.png" mode="aspectFit"></image>
+          <view class="edit-icon">✏️</view>
+        </view>
+        <view class="user-text-info">
+          <view class="name-line">
+            <text class="user-name">{{userInfo.nickname}}</text>
+            <!-- 动态显示当前佩戴的称号文本与背景颜色 -->
+            <text class="title-badge" style="background: {{equippedTitleColor}};">{{equippedTitleName}}</text>
+          </view>
+          <view class="meta-line">等级: Lv.{{userInfo.level}} | 🪙 金币: {{userInfo.coins}}</view>
+        </view>
+      </view>
+
+      <view class="user-bottom-row">
+        <button class="card-action-btn shop-btn" bindtap="openTitleShop">🏷️ 称号商城</button>
+        <button class="card-action-btn checkin-btn {{hasCheckedInToday ? 'disabled' : ''}}" bindtap="handleCheckin">
+          {{hasCheckedInToday ? '✔️ 已签到' : '📅 每日签到'}}
+        </button>
+        <button class="card-action-btn logout-btn" bindtap="handleLogout">🚪 退出</button>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="user-top-row">
+        <view class="avatar-container">
+          <view class="guest-avatar-box">❓</view>
+        </view>
+        <view class="user-text-info">
+          <view class="user-name">未登录游客</view>
+          <view class="meta-line">登录后解锁存档、排行榜与成就</view>
+        </view>
+      </view>
+      <view class="user-bottom-row">
+        <button class="pixel-btn-gold login-trigger-btn" bindtap="openLoginModal">🟩 微信一键登录</button>
+      </view>
+    </block>
+  </view>
+
+  <!-- 2. 地图编辑器横幅 -->
+  <view class="pixel-card editor-banner" bindtap="openEditor">
+    <view class="banner-left">
+      <view class="banner-title">🛠️ 关卡编辑器</view>
+      <view class="banner-desc">自由绘制 8x8 关卡、逻辑校验与试玩</view>
+    </view>
+    <view class="banner-arrow">➔</view>
+  </view>
+
+  <!-- 3. 关卡列表 -->
+  <view class="section-title-row">
+    <text class="section-title">🎮 关卡选择</text>
+    <text class="section-badge">解锁进度: {{unlockedLevels}} / {{levels.length}}</text>
+  </view>
+
+  <view class="level-grid">
+    <view class="level-card-wrapper" wx:for="{{levels}}" wx:key="index">
+      <view class="pixel-card level-card {{unlockedLevels > index ? '' : 'locked'}}" bindtap="chooseLevel" data-level="{{index}}">
+        <view class="preview-box">
+          <canvas canvas-id="preview_{{index}}" class="preview-canvas"></canvas>
+          <view class="level-num-tag">第 {{index + 1}} 关</view>
+        </view>
+        <view class="card-body">
+          <block wx:if="{{unlockedLevels > index}}">
+            <view class="stars-row" wx:if="{{stars[index] && stars[index] > 0}}">
+              <text wx:for="{{stars[index]}}" wx:key="*this">⭐</text>
+            </view>
+            <view class="no-stars-text" wx:else>暂无星级评价</view>
+            <view class="enter-btn-text">开始挑战</view>
+          </block>
+          <block wx:else>
+            <view class="lock-text">🔒 需要通关前一关</view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 4. 底部 Arcade 导航栏 -->
+  <view class="bottom-nav">
+    <view class="nav-item active">
+      <text class="nav-icon">🏠</text>
+      <text class="nav-label">大厅</text>
+    </view>
+    <view class="nav-item" bindtap="openRank">
+      <text class="nav-icon">🏆</text>
+      <text class="nav-label">好友榜</text>
+    </view>
+    <view class="nav-item" bindtap="openStats">
+      <text class="nav-icon">📊</text>
+      <text class="nav-label">统计</text>
+    </view>
+    <view class="nav-item" bindtap="openAchievement">
+      <text class="nav-icon">🏅</text>
+      <text class="nav-label">成就</text>
+    </view>
+    <view class="nav-item" bindtap="openAbout">
+      <text class="nav-icon">⚙️</text>
+      <text class="nav-label">设置</text>
+    </view>
+  </view>
+
+  <!-- 登录授权弹窗 -->
+  <view class="modal-mask" wx:if="{{showLoginAuthModal}}">
+    <view class="pixel-card auth-modal">
+      <view class="auth-header">
+        <image class="auth-app-icon" src="/images/player/player_01.png"></image>
+        <text class="auth-app-name">推箱子大冒险 申请</text>
+      </view>
+      <view class="auth-title">获取您的公开信息（昵称、头像等）</view>
+      <view class="auth-desc">授权后可保存您的通关进度、解锁成就并在好友排行榜中展示。</view>
+      <view class="auth-btn-row">
+        <button class="pixel-btn-gray auth-btn" bindtap="cancelLogin">拒绝</button>
+        <button class="pixel-btn-gold auth-btn" bindtap="confirmLogin">允许登录</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 重构后的称号商城弹窗 (纯 Tag 样式，防重复购买) -->
+  <view class="modal-mask" wx:if="{{showShopModal}}">
+    <view class="pixel-card shop-modal">
+      <view class="modal-title">🏷️ 称号商城</view>
+      <view class="shop-coin-info">当前金币: 🪙 {{userInfo.coins}}</view>
+
+      <view class="shop-list">
+        <view class="shop-item" wx:for="{{titlesList}}" wx:key="id">
+          <view class="shop-left">
+            <text class="title-preview-badge" style="background: {{item.tagColor}};">{{item.name}}</text>
+          </view>
+
+          <!-- 状态 1：当前正在使用/佩戴 -->
+          <button class="buy-btn equipped" wx:if="{{item.isEquipped}}">✔️ 当前使用</button>
+
+          <!-- 状态 2：已解锁，点击一键佩戴 -->
+          <button class="pixel-btn-gold buy-btn equip" wx:elif="{{item.isUnlocked}}" bindtap="equipTitle" data-id="{{item.id}}">使 用</button>
+
+          <!-- 状态 3：未解锁，点击金币购买 -->
+          <button class="pixel-btn-gold buy-btn" wx:else bindtap="buyTitle" data-id="{{item.id}}" data-price="{{item.price}}">
+            🪙 {{item.price}} 购买
+          </button>
+        </view>
+      </view>
+
+      <button class="pixel-btn-gray modal-close-btn" bindtap="closeShopModal">关 闭</button>
+    </view>
+  </view>
+
+  <!-- 修改昵称弹窗 -->
+  <view class="modal-mask" wx:if="{{showNicknameModal}}">
+    <view class="pixel-card modal-box">
+      <view class="modal-title">✏️ 修改玩家昵称</view>
+      <input class="pixel-input" placeholder="输入新昵称(2-8字)" value="{{inputNickname}}" bindinput="onNicknameInput" maxlength="8"/>
+      <view class="modal-btn-row">
+        <button class="pixel-btn-gray modal-btn" bindtap="closeNicknameModal">取消</button>
+        <button class="pixel-btn-gold modal-btn" bindtap="submitNickname">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,31 @@
+<view class="container" bindtouchstart="touchStart" bindtouchend="touchEnd">
+  <!-- 头部信息栏 -->
+  <view class="header-info">
+    <text class="title">第 {{level + 1}} 关</text>
+    <view class="stat-bar">
+      <text>步数: {{steps}}</text>
+      <text>用时: {{timerStr}}</text>
+    </view>
+  </view>
+
+  <!-- 画布展示区域 -->
+  <view class="canvas-area">
+    <canvas canvas-id="myCanvas" class="myCanvas"></canvas>
+  </view>
+
+  <!-- 辅助操作栏 (撤销/重置) -->
+  <view class="action-bar">
+    <button class="action-btn" bindtap="undo">↩️ 悔棋</button>
+    <button class="action-btn restart" bindtap="restartGame">🔄 重置</button>
+  </view>
+
+  <!-- 4方向控制键 -->
+  <view class="btnBox">
+    <button type="primary" class="dir-btn up" bindtap="up">▲</button>
+    <view class="middle-row">
+      <button type="primary" class="dir-btn" bindtap="left">◀</button>
+      <button type="primary" class="dir-btn" bindtap="down">▼</button>
+      <button type="primary" class="dir-btn" bindtap="right">▶</button>
+    </view>
+  </view>
+</view>

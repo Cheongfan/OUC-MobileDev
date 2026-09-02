@@ -1,0 +1,15 @@
+.container { min-height: 100vh; background: #241c18; padding: 24rpx; }
+.title { font-size: 16pt; font-weight: bold; color: #f7b731; margin-bottom: 24rpx; text-align: center; }
+.rank-card { background: #362a22; border: 4rpx solid #5a4535; border-radius: 12rpx; padding: 10rpx 20rpx; }
+.rank-item { display: flex; align-items: center; padding: 20rpx 0; border-bottom: 2rpx solid #4a3828; }
+.rank-item.is-me { background: rgba(247, 183, 49, 0.15); border: 2rpx solid #f7b731; border-radius: 8rpx; padding: 20rpx 10rpx; }
+
+.rank-num { width: 60rpx; height: 60rpx; display: flex; align-items: center; justify-content: center; font-size: 14pt; font-weight: bold; color: #fff; }
+.medal-img { width: 44rpx; height: 44rpx; }
+
+.avatar-box { font-size: 20pt; margin: 0 16rpx; }
+.user-info { flex: 1; }
+.name { font-size: 11pt; font-weight: bold; color: #fff; display: flex; align-items: center; gap: 10rpx; }
+.me-tag { background: #f7b731; color: #000; font-size: 7pt; padding: 2rpx 8rpx; border-radius: 4rpx; }
+.sub { font-size: 8pt; color: #a4b0be; margin-top: 4rpx; }
+.star-badge { font-size: 11pt; font-weight: bold; color: #f7b731; }

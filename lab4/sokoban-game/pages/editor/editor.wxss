@@ -1,0 +1,7 @@
+.title { font-size: 18pt; color: #ffb830; margin-bottom: 20rpx; font-weight: bold; }
+.canvas-area { border: 6rpx solid #ffb830; border-radius: 12rpx; overflow: hidden; }
+.editorCanvas { width: 320px; height: 320px; }
+.palette { display: flex; flex-wrap: wrap; justify-content: space-around; width: 100%; margin: 20rpx 0; }
+.palette-item { background: #333; padding: 12rpx 20rpx; border-radius: 8rpx; border: 2rpx solid #555; font-size: 10pt; }
+.palette-item.active { background: #ffb830; color: #000; font-weight: bold; border-color: #fff; }
+.btn-row { display: flex; justify-content: space-between; width: 80%; margin-top: 20rpx; }

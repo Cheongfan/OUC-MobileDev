@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="title">🏅 成就勋章馆</view>
+
+  <view class="pixel-card ach-card {{item.unlocked ? 'unlocked' : 'locked'}}" wx:for="{{list}}" wx:key="id">
+    <view class="ach-icon">{{item.icon}}</view>
+    <view class="ach-body">
+      <view class="ach-name">{{item.name}}</view>
+      <view class="ach-desc">{{item.desc}}</view>
+      <view class="ach-progress-bar">
+        <view class="fill" style="{{item.progressStyle}}"></view>
+      </view>
+      <view class="ach-target-text">当前进度: {{item.current}} / {{item.target}}</view>
+    </view>
+    <view class="ach-status-badge">{{item.unlocked ? '✅ 已解锁' : '🔒 未完成'}}</view>
+  </view>
+</view>
