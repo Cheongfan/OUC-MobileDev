@@ -1,0 +1,9 @@
+{
+  "name": "toggleLike",
+  "version": "1.0.0",
+  "description": "原子级点赞状态反转与计数处理",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
