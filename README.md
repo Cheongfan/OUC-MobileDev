@@ -2,6 +2,8 @@
 
 本仓库为本人在中国海洋大学26夏《移动软件开发》课程中产生的实验代码与工程文档的汇总仓库。
 
+个人博客：[https://Cheongfan.github.io](https://Cheongfan.github.io)
+
 ---
 
 ## 📚 课程实验目录索引
