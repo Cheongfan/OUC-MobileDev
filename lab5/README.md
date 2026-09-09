@@ -36,14 +36,31 @@ lab5/                          # 实验五目录
 │   │   │       │   ├── ProgrammerView.ets      # 程序员计算器（四进制联动与位运算）
 │   │   │       │   ├── ScientificView.ets      # 6x8 矩阵科学计算器（含 2nd 变身）
 │   │   │       │   └── StandardKeypadView.ets  # 6x4 矩阵普通计算器键盘
-│   │   │       ├── components/        # 公共基础按键组件 (CalcKey.ets)
-│   │   │       ├── rate/              # 汇率模块（双币种卡片、4x4 键盘、币种抽屉）
-│   │   │       └── settings/          # 系统设置视图（SettingsView.ets，纯黑夜间模式与主题切换）
+│   │   │       ├── components/        # 公共基础按键组件
+│   │   │       │   ├── CalcKey.ets             # 具备微动效的基础按键组件
+│   │   │       │   ├── RightOperatorColumn.ets # 右侧固定运算操作列组件
+│   │   │       │   └── ScientificPad.ets       # 科学扩展键区组件
+│   │   │       ├── rate/              # 汇率模块组件
+│   │   │       │   ├── CurrencySelectSheet.ets # 国际货币选择抽屉组件
+│   │   │       │   ├── RateConverterMainView.ets # 汇率主交互与双向换算视图
+│   │   │       │   └── RateKeypad.ets          # 专属 4x4 金融数字键盘
+│   │   │       ├── settings/          # 系统设置视图 (SettingsView.ets)
+│   │   │       └── tools/             # 工具模块 (ToolsMainView.ets)
 │   │   ├── src/main/resources/# 项目静态资源（矢量图标、国际化字符表等）
+│   │   ├── .gitignore         # 模块级 Git 忽略规则文件
+│   │   ├── build-profile.json5# 模块级构建配置
+│   │   ├── code-linter.json5  # 模块代码规约检查配置
+│   │   ├── hvigorfile.ts      # 模块自动化构建脚本
 │   │   ├── module.json5       # 模块配置文件（含 ohos.permission.INTERNET 网络权限）
-│   │   └── build-profile.json5# 构建与 SDK 版本配置文件
+│   │   ├── obfuscation-rules.txt # 源码混淆规则文件
+│   │   └── oh-package.json5   # 模块级依赖声明文件
+│   ├── .gitignore             # 工程级 Git 忽略规则文件
 │   ├── build-profile.json5    # 工程级构建配置
-│   └── hvigor/                # Hvigor 构建工具配置
+│   ├── code-linter.json5      # 工程级代码规约检查配置
+│   ├── hvigor/                # Hvigor 构建包装器及配置文件
+│   ├── hvigorfile.ts          # 工程自动化构建脚本
+│   ├── oh-package.json5       # 工程级依赖声明文件
+│   └── oh-package-lock.json5  # 依赖版本锁定文件
 │
 ├── README.md                  # 实验五说明文档（本文件）
 ├── report.md                  # 实验五实验报告（.md）
