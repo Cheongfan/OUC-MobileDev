@@ -1,0 +1,74 @@
+/** app.wxss **/
+page {
+  --bg-primary: #0F1115;       /* 主背景：沉浸暗黑 */
+  --bg-card: rgba(26, 29, 36, 0.75); /* 毛玻璃卡片底色 */
+  --accent-gold: #E5C07B;     /* 复古胶片暖金色 */
+  --accent-cyan: #4EC9B0;     /* 留声波形霓虹绿 */
+  --accent-heart: #FF4757;    /* 爆裂红心色彩 */
+  --text-main: #F3F4F6;       /* 主文本 */
+  --text-sub: #9CA3AF;        /* 辅助灰 */
+  --border-light: rgba(255, 255, 255, 0.08); /* 超细拟物边框 */
+
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 全局容器规范 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 60rpx;
+}
+
+/* 拟物高质感毛玻璃容器 */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1rpx solid var(--border-light);
+  border-radius: 28rpx;
+  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.45);
+}
+
+/* 双击点赞漂浮爱心粒子核心动画 */
+@keyframes heartBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-15deg);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.3) rotate(0deg);
+  }
+  70% {
+    opacity: 0.9;
+    transform: scale(1.0) translateY(-40rpx);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) translateY(-100rpx);
+  }
+}
+
+.heart-bubble {
+  position: absolute;
+  width: 120rpx;
+  height: 120rpx;
+  pointer-events: none;
+  z-index: 99;
+  animation: heartBurst 0.9s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+/* 通用按钮微光动效 */
+.ripple-tap {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.ripple-tap:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}

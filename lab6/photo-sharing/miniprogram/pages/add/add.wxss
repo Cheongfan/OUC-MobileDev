@@ -1,0 +1,366 @@
+/* pages/add/add.wxss */
+.studio-container {
+  min-height: 100vh;
+  background-color: #0F1115;
+  padding: 24rpx 36rpx 100rpx 36rpx;
+  box-sizing: border-box;
+}
+
+/* 取景相框区 */
+.viewfinder-section {
+  width: 100%;
+  height: 480rpx;
+  margin-bottom: 30rpx;
+}
+
+.upload-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 28rpx;
+  background: #161920;
+  border: 2rpx dashed rgba(229, 192, 123, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lens-crosshair {
+  position: absolute;
+  width: 140rpx;
+  height: 140rpx;
+  border: 1rpx solid rgba(229, 192, 123, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.camera-icon {
+  font-size: 72rpx;
+  margin-bottom: 16rpx;
+}
+
+.placeholder-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #E5C07B;
+  letter-spacing: 2rpx;
+}
+
+.placeholder-sub {
+  font-size: 22rpx;
+  color: #6B7280;
+  margin-top: 10rpx;
+}
+
+.preview-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 28rpx;
+  overflow: hidden;
+  box-shadow: 0 16rpx 36rpx rgba(0, 0, 0, 0.5);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+}
+
+.rechoose-badge {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  background: rgba(15, 17, 21, 0.85);
+  color: #E5C07B;
+  font-size: 22rpx;
+  padding: 10rpx 24rpx;
+  border-radius: 30rpx;
+  backdrop-filter: blur(10px);
+  border: 1rpx solid rgba(229, 192, 123, 0.3);
+}
+
+/* 文案输入框 */
+.caption-panel {
+  padding: 24rpx;
+  margin-bottom: 28rpx;
+  background: rgba(26, 29, 36, 0.75);
+  border: 1rpx solid rgba(255, 255, 255, 0.08);
+  border-radius: 24rpx;
+}
+
+.caption-input {
+  width: 100%;
+  height: 130rpx;
+  font-size: 28rpx;
+  color: #F3F4F6;
+  line-height: 1.6;
+}
+
+.input-placeholder {
+  color: #4B5563;
+}
+
+.word-counter {
+  text-align: right;
+  font-size: 20rpx;
+  color: #6B7280;
+}
+
+/* 控制功能面板 */
+.controls-panel {
+  padding: 10rpx 28rpx;
+  margin-bottom: 40rpx;
+  background: rgba(26, 29, 36, 0.75);
+  border: 1rpx solid rgba(255, 255, 255, 0.08);
+  border-radius: 24rpx;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.05);
+}
+
+.control-row:last-child {
+  border-bottom: none;
+}
+
+.control-left {
+  display: flex;
+  align-items: center;
+  max-width: 65%;
+}
+
+.control-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.control-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.control-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #E5E7EB;
+}
+
+.control-desc {
+  font-size: 22rpx;
+  color: #9CA3AF;
+  margin-top: 4rpx;
+}
+
+.location-desc {
+  color: #E5C07B;
+}
+
+.chevron-right {
+  color: #6B7280;
+  font-size: 36rpx;
+}
+
+/* 录音互动按钮 & 声波跳动动效 */
+.recorder-interactive {
+  display: flex;
+  align-items: center;
+}
+
+.record-trigger-btn {
+  background: #252A34;
+  border: 1rpx solid #E5C07B;
+  border-radius: 40rpx;
+  padding: 14rpx 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160rpx;
+  box-sizing: border-box;
+}
+
+.record-trigger-btn.recording-active {
+  background: #DC2626 !important;
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 20rpx rgba(239, 68, 68, 0.6);
+}
+
+.record-btn-text {
+  font-size: 24rpx;
+  color: #E5C07B;
+  font-weight: 600;
+}
+
+.wave-bars {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  height: 28rpx;
+}
+
+.recording-sec-text {
+  font-size: 22rpx;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-left: 8rpx;
+}
+
+.bar {
+  width: 6rpx;
+  background: #FFFFFF;
+  border-radius: 4rpx;
+  animation: barBounce 0.5s infinite ease-in-out alternate;
+}
+
+.b1 { height: 10rpx; animation-delay: 0.1s; }
+.b2 { height: 26rpx; animation-delay: 0.25s; }
+.b3 { height: 16rpx; animation-delay: 0.15s; }
+.b4 { height: 22rpx; animation-delay: 0.35s; }
+
+@keyframes barBounce {
+  from { height: 6rpx; }
+  to { height: 28rpx; }
+}
+
+/* 录音完成气泡 */
+.voice-preview-bubble {
+  display: flex;
+  align-items: center;
+  background: #1C2331;
+  border: 1rpx solid #4EC9B0;
+  border-radius: 36rpx;
+  padding: 10rpx 20rpx;
+  gap: 16rpx;
+}
+
+.play-voice-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  color: #4EC9B0;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.delete-voice-btn {
+  color: #9CA3AF;
+  font-size: 24rpx;
+  padding: 4rpx 8rpx;
+}
+
+/* 按钮样式重置 */
+button.publish-btn {
+  width: 100% !important;
+  height: 96rpx !important;
+  line-height: 96rpx !important;
+  border-radius: 48rpx !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+button.publish-btn::after {
+  display: none !important;
+}
+
+button.btn-disabled {
+  background-color: #1E232D !important;
+  color: #6B7280 !important;
+  border: 1rpx solid rgba(255, 255, 255, 0.08) !important;
+  font-size: 28rpx !important;
+  font-weight: 500 !important;
+}
+
+button.btn-ready {
+  background: linear-gradient(135deg, #F3D99E 0%, #E5C07B 50%, #C99B4A 100%) !important;
+  color: #0A0C10 !important;
+  font-size: 30rpx !important;
+  font-weight: 700 !important;
+  letter-spacing: 2rpx !important;
+  box-shadow: 0 10rpx 30rpx rgba(229, 192, 123, 0.4) !important;
+}
+
+/* 底部电影胶卷 */
+.history-archive-section {
+  margin-top: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #D1D5DB;
+}
+
+.archive-count {
+  font-size: 22rpx;
+  color: #6B7280;
+}
+
+.film-scroll {
+  display: flex;
+  white-space: nowrap;
+  padding: 16rpx 0;
+  width: 100%;
+}
+
+.film-cell {
+  position: relative;
+  display: inline-block;
+  width: 180rpx;
+  height: 240rpx;
+  background: #16181D;
+  border: 4rpx solid #2B2F38;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+  border-radius: 8rpx;
+  padding: 16rpx 0;
+  box-sizing: border-box;
+}
+
+.sprocket-hole-top, .sprocket-hole-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8rpx;
+  background-image: radial-gradient(circle, #0F1115 40%, transparent 45%);
+  background-size: 20rpx 8rpx;
+}
+.sprocket-hole-top { top: 4rpx; }
+.sprocket-hole-bottom { bottom: 4rpx; }
+
+.film-thumb {
+  width: 100%;
+  height: 100%;
+}
+
+.film-index-stamp {
+  position: absolute;
+  bottom: 12rpx;
+  right: 8rpx;
+  font-family: "Courier New", monospace;
+  font-size: 16rpx;
+  color: #E5C07B;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2rpx 6rpx;
+}
+
+.film-empty {
+  color: #4B5563;
+  font-size: 24rpx;
+  padding: 40rpx 0;
+}

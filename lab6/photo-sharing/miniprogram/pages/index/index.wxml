@@ -1,0 +1,166 @@
+<!-- pages/index/index.wxml -->
+<view class="home-container">
+
+<!-- 1. 顶部个人账号与模式切换栏 -->
+<view class="home-top-bar">
+  <view class="user-account-pill ripple-tap" bindtap="navToMyArchive">
+    <image class="my-avatar" src="{{userProfile.avatarUrl}}" mode="aspectFill" />
+    <view class="my-info">
+      <text class="my-name">{{userProfile.nickName}}</text>
+      <text class="my-badge">我的影集 ›</text>
+    </view>
+  </view>
+
+  <view class="switch-capsule">
+    <view 
+      class="capsule-item {{currentView === 'feed' ? 'active' : ''}}" 
+      bindtap="switchView" 
+      data-mode="feed">
+      📷 胶片流
+    </view>
+    <view 
+      class="capsule-item {{currentView === 'map' ? 'active' : ''}}" 
+      bindtap="switchView" 
+      data-mode="map">
+      🗺️ 足迹地图
+    </view>
+  </view>
+</view>
+
+<!-- 2. 模式 A：拍立得卡片流视图 -->
+<block wx:if="{{currentView === 'feed'}}">
+  <view class="photo-feed">
+    
+    <block wx:for="{{photoList}}" wx:key="_id">
+      <view class="polaroid-card">
+        
+        <view class="card-header">
+          <image 
+            class="author-avatar ripple-tap" 
+            src="{{item.userInfo.avatarUrl}}" 
+            catchtap="navToAuthor" 
+            data-openid="{{item._openid}}" 
+            mode="aspectFill" />
+          <view class="author-meta" catchtap="navToAuthor" data-openid="{{item._openid}}">
+            <text class="author-name">{{item.userInfo.nickName}}</text>
+            <view class="sub-line">
+              <text class="location-tag" wx:if="{{item.location && item.location.placeName}}">📍 {{item.location.placeName}}</text>
+              <text class="time-tag">{{item.relativeTime}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="photo-frame" bindtap="handlePhotoTap" data-id="{{item._id}}" data-index="{{index}}">
+          <image 
+            class="main-image {{item.isBlurred ? 'darkroom-blur' : ''}}" 
+            src="{{item.photoUrl}}" 
+            mode="widthFix" 
+            lazy-load />
+          
+          <view class="darkroom-tag" wx:if="{{item.isBlurred}}">
+            <text class="flask-text">🧪 轻触显影</text>
+          </view>
+
+          <view 
+            wx:if="{{item.voiceUrl}}" 
+            class="vinyl-capsule {{currentPlayingId === item._id ? 'playing' : ''}}" 
+            catchtap="togglePlayVoice" 
+            data-voice="{{item.voiceUrl}}" 
+            data-id="{{item._id}}">
+            <view class="vinyl-disc">
+              <view class="vinyl-groove"></view>
+              <view class="vinyl-center"></view>
+            </view>
+            <text class="voice-hint">{{currentPlayingId === item._id ? '聆听中...' : item.voiceDuration + 's 留声'}}</text>
+          </view>
+
+          <view class="heart-burst-box" wx:if="{{item.showHeartAnim}}">
+            <view class="burst-heart">❤️</view>
+          </view>
+        </view>
+
+        <view class="polaroid-bottom">
+          <text class="card-caption" wx:if="{{item.caption}}">{{item.caption}}</text>
+          
+          <view class="action-footer">
+            <view class="date-stamp">{{item.addDate}} · FILM ARCHIVE</view>
+            <view class="like-btn ripple-tap" catchtap="handleLike" data-id="{{item._id}}" data-index="{{index}}">
+              <text class="like-icon">{{item.isLiked ? '❤️' : '🤍'}}</text>
+              <text class="like-count {{item.isLiked ? 'liked-text' : ''}}">{{item.likeCount || 0}}</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </block>
+
+    <view class="empty-hint-box" wx:if="{{photoList.length === 0 && !isLoading}}">
+      <text class="empty-icon">🎞️</text>
+      <text class="empty-title">云端胶片库暂无数据</text>
+      <text class="empty-sub">若已在后台导入数据，请检查 photos 集合权限是否已设为“所有用户可读”</text>
+      <button class="empty-seed-btn ripple-tap" bindtap="forceInjectSeeds">一键向云端注入初始社区作品</button>
+    </view>
+
+  </view>
+</block>
+
+<!-- 3. 模式 B：城市足迹地图视图 -->
+<block wx:if="{{currentView === 'map'}}">
+  <view class="map-wrapper">
+    <map 
+      id="footprintMap" 
+      class="custom-map" 
+      latitude="{{centerLat}}" 
+      longitude="{{centerLng}}" 
+      scale="{{mapScale}}" 
+      markers="{{mapMarkers}}" 
+      bindmarkertap="onMarkerTap" 
+      show-location>
+
+      <cover-view slot="callout">
+        <block wx:for="{{mapMarkers}}" wx:key="id">
+          <cover-view class="avatar-callout-box" marker-id="{{item.id}}">
+            <cover-image class="callout-avatar" src="{{item.customData.userInfo.avatarUrl}}" />
+            <cover-view class="callout-meta">
+              <cover-view class="callout-title">{{item.customData.location.placeName}}</cover-view>
+              <cover-view class="callout-author">@{{item.customData.userInfo.nickName}}</cover-view>
+            </cover-view>
+          </cover-view>
+        </block>
+      </cover-view>
+    </map>
+
+    <view class="map-photo-carousel">
+      <scroll-view class="carousel-scroll" scroll-x enable-flex>
+        <block wx:for="{{photoList}}" wx:key="_id">
+          <view 
+            class="carousel-card {{selectedPhotoId === item._id ? 'card-highlight' : ''}}" 
+            catchtap="locateToPhoto" 
+            data-item="{{item}}">
+            <image class="carousel-img" src="{{item.photoUrl}}" mode="aspectFill" />
+            <view class="carousel-info">
+              <text class="carousel-place">📍 {{item.location.placeName || '未知秘境'}}</text>
+              <text class="carousel-author">定格者: {{item.userInfo.nickName}}</text>
+              <view class="carousel-btn ripple-tap" catchtap="navToDetail" data-id="{{item._id}}">
+                查看胶片 ›
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+</block>
+
+<!-- 4. [教材考核必考] 悬浮相机按钮：绑定 open-type="getUserInfo" 与 bindgetuserinfo -->
+<button 
+  class="fab-upload-btn ripple-tap" 
+  open-type="getUserInfo" 
+  bindgetuserinfo="getUserInfo">
+  <view class="camera-lens">
+    <view class="lens-reflection"></view>
+  </view>
+  <text class="fab-text">定格</text>
+</button>
+
+</view>

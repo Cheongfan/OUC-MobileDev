@@ -1,0 +1,137 @@
+<!-- pages/add/add.wxml -->
+<view class="studio-container">
+
+<!-- 1. 胶片取景相框 (纯净极简版，点击弹出拍照/相册选项) -->
+<view class="viewfinder-section">
+  <!-- 未选图状态 -->
+  <view class="upload-placeholder ripple-tap" bindtap="showPhotoSourceActionSheet" wx:if="{{!tempPhotoPath}}">
+    <view class="lens-crosshair"></view>
+    <text class="camera-icon">📷</text>
+    <text class="placeholder-title">轻触定格胶片</text>
+    <text class="placeholder-sub">点击自由选择「现场拍摄」或「相册导入」</text>
+  </view>
+
+  <!-- 已选图预览状态 -->
+  <view class="preview-box" wx:else>
+    <image class="preview-image" src="{{tempPhotoPath}}" mode="aspectFill" />
+    <view class="rechoose-badge ripple-tap" bindtap="showPhotoSourceActionSheet">
+      <text>重选胶卷 ↺</text>
+    </view>
+  </view>
+</view>
+
+<!-- 2. 心情碎念文案输入区 -->
+<view class="caption-panel glass-panel">
+  <textarea 
+    class="caption-input" 
+    placeholder="此刻在想什么？写下一句定格此景的文案..." 
+    placeholder-class="input-placeholder"
+    maxlength="140"
+    bindinput="onCaptionInput" 
+    value="{{caption}}">
+  </textarea>
+  <view class="word-counter">{{caption.length}}/140</view>
+</view>
+
+<!-- 3. 留声胶囊与打卡控制区 -->
+<view class="controls-panel glass-panel">
+
+  <!-- 3.1 录制音频胶囊 -->
+  <view class="control-row voice-recorder-row">
+    <view class="control-left">
+      <text class="control-icon">🎙️</text>
+      <view class="control-texts">
+        <text class="control-title">留声胶囊 (限10秒)</text>
+        <text class="control-desc">{{voiceRecordText}}</text>
+      </view>
+    </view>
+
+    <view class="recorder-interactive">
+      <view 
+        wx:if="{{!tempVoicePath}}"
+        class="record-trigger-btn {{isRecording ? 'recording-active' : ''}}" 
+        bindtap="handleRecordTap"
+        bindtouchstart="handleTouchStart" 
+        bindtouchend="handleTouchEnd">
+        
+        <view class="wave-bars" wx:if="{{isRecording}}">
+          <view class="bar b1"></view><view class="bar b2"></view>
+          <view class="bar b3"></view><view class="bar b4"></view>
+          <text class="recording-sec-text">{{currentRecordSec}}s</text>
+        </view>
+        <text class="record-btn-text" wx:else>录制留声</text>
+      </view>
+
+      <view class="voice-preview-bubble" wx:else>
+        <view class="play-voice-btn ripple-tap" bindtap="playRecordedVoice">
+          <text>{{isPlayingVoice ? '⏸' : '▶'}}</text>
+          <text class="voice-sec">{{voiceDuration}}s</text>
+        </view>
+        <text class="delete-voice-btn" bindtap="deleteRecordedVoice">✕</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3.2 城市足迹打卡 -->
+  <view class="control-row ripple-tap" bindtap="chooseLocation">
+    <view class="control-left">
+      <text class="control-icon">📍</text>
+      <view class="control-texts">
+        <text class="control-title">时空足迹</text>
+        <text class="control-desc location-desc">{{placeName || '点此标记拍摄地点 (点亮地图)'}}</text>
+      </view>
+    </view>
+    <text class="chevron-right">›</text>
+  </view>
+
+  <!-- 3.3 暗房显影模式开关 -->
+  <view class="control-row">
+    <view class="control-left">
+      <text class="control-icon">🧪</text>
+      <view class="control-texts">
+        <text class="control-title">暗房神秘显影</text>
+        <text class="control-desc">开启后初看带柔焦，摇晃手机显影</text>
+      </view>
+    </view>
+    <switch 
+      color="#E5C07B" 
+      checked="{{isBlurred}}" 
+      bindchange="onBlurSwitchChange" />
+  </view>
+
+</view>
+
+<!-- 4. 提交发布大按钮 -->
+<view class="publish-section">
+  <button 
+    class="publish-btn {{canSubmit ? 'btn-ready' : 'btn-disabled'}} ripple-tap" 
+    bindtap="handleSubmit" 
+    loading="{{isSubmitting}}"
+    disabled="{{!canSubmit || isSubmitting}}">
+    {{isSubmitting ? '正在冲洗入库...' : '入库并冲洗胶片'}}
+  </button>
+</view>
+
+<!-- 5. 底部电影胶卷底片存档 -->
+<view class="history-archive-section">
+  <view class="section-header">
+    <text class="section-title">🎞️ 我的暗房底片胶卷</text>
+    <text class="archive-count">{{historyList.length}} 张存档</text>
+  </view>
+
+  <scroll-view class="film-scroll" scroll-x enable-flex>
+    <block wx:for="{{historyList}}" wx:key="_id">
+      <view class="film-cell" bindtap="navToDetail" data-id="{{item._id}}">
+        <view class="sprocket-hole-top"></view>
+        <image class="film-thumb" src="{{item.photoUrl}}" mode="aspectFill" />
+        <view class="sprocket-hole-bottom"></view>
+        <view class="film-index-stamp">NO.{{index + 1}}</view>
+      </view>
+    </block>
+    <view class="film-empty" wx:if="{{historyList.length === 0}}">
+      <text>暂无存档底片</text>
+    </view>
+  </scroll-view>
+</view>
+
+</view>

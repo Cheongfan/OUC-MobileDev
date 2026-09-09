@@ -1,0 +1,133 @@
+/* pages/homepage/homepage.wxss */
+.archive-container {
+  min-height: 100vh;
+  background-color: #0F1115;
+  padding: 30rpx 36rpx 80rpx 36rpx;
+  box-sizing: border-box;
+}
+
+/* 档案看板 */
+.author-profile-card {
+  padding: 40rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.profile-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 4rpx solid #E5C07B;
+  box-shadow: 0 10rpx 30rpx rgba(229, 192, 123, 0.3);
+  margin-bottom: 20rpx;
+}
+
+.profile-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #F3F4F6;
+}
+
+.profile-badge {
+  font-size: 22rpx;
+  color: #E5C07B;
+  background: rgba(229, 192, 123, 0.1);
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  margin-top: 10rpx;
+  border: 1rpx solid rgba(229, 192, 123, 0.2);
+}
+
+.stats-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+  margin-top: 36rpx;
+  padding-top: 30rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.08);
+}
+
+.stat-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-num {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #F3F4F6;
+}
+
+.stat-txt {
+  font-size: 20rpx;
+  color: #9CA3AF;
+  margin-top: 4rpx;
+}
+
+.stat-divider {
+  width: 1rpx;
+  height: 40rpx;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 画廊网格 */
+.gallery-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #D1D5DB;
+  margin-bottom: 24rpx;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.grid-card {
+  position: relative;
+  height: 320rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 10rpx 25rpx rgba(0, 0, 0, 0.5);
+  border: 1rpx solid rgba(255, 255, 255, 0.08);
+}
+
+.grid-image {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 16rpx 14rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overlay-date {
+  font-size: 18rpx;
+  color: #D1D5DB;
+  font-family: monospace;
+}
+
+.overlay-like {
+  font-size: 20rpx;
+  color: #F87171;
+}
+
+.empty-archive {
+  text-align: center;
+  color: #6B7280;
+  padding: 80rpx 0;
+  font-size: 24rpx;
+}

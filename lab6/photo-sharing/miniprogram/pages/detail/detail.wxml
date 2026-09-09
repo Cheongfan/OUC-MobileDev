@@ -1,0 +1,110 @@
+<!-- pages/detail/detail.wxml -->
+<view class="detail-container">
+
+<!-- 1. 沉浸式漫反射背景 -->
+<image class="ambient-backdrop" src="{{photoInfo.photoUrl}}" mode="aspectFill" />
+<view class="ambient-overlay"></view>
+
+<!-- 2. 主体拍立得相框 -->
+<view class="polaroid-wrapper">
+  <view class="polaroid-board">
+    
+    <!-- 照片主体 (一次显影后永久高清) -->
+    <view class="photo-viewport" bindtap="previewFullImage">
+      <image 
+        class="core-image {{isDeveloped ? 'revealed' : (photoInfo.isBlurred ? 'darkroom-hidden' : '')}}" 
+        src="{{photoInfo.photoUrl}}" 
+        mode="widthFix" />
+      
+      <!-- 仅在未显影时显示轻量提示 -->
+      <view 
+        class="darkroom-mask" 
+        wx:if="{{photoInfo.isBlurred && !isDeveloped}}" 
+        catchtap="manualDevelop">
+        <view class="mini-tip-capsule">
+          <text>🧪 摇一摇或轻触显影</text>
+        </view>
+      </view>
+
+      <!-- [特色功能] 本人胶片专属销毁按钮 -->
+      <view 
+        class="owner-delete-tag ripple-tap" 
+        wx:if="{{isMyPhoto}}" 
+        catchtap="confirmDeleteFilm">
+        <text>🗑️ 销毁底片</text>
+      </view>
+    </view>
+
+    <!-- 拍立得相纸底部留白信息 -->
+    <view class="polaroid-meta-board">
+      <view class="meta-main-row">
+        <view class="author-block">
+          <image class="author-avatar" src="{{photoInfo.userInfo.avatarUrl}}" mode="aspectFill" />
+          <text class="author-name">{{photoInfo.userInfo.nickName}}</text>
+        </view>
+        <text class="film-stamp">{{photoInfo.addDate}} · ARCHIVE</text>
+      </view>
+
+      <!-- 心情文案 -->
+      <text class="meta-caption" wx:if="{{photoInfo.caption}}">{{photoInfo.caption}}</text>
+
+      <!-- 地理与打卡信息 -->
+      <view class="location-chip" wx:if="{{photoInfo.location && photoInfo.location.placeName}}">
+        <text>📍 {{photoInfo.location.placeName}}</text>
+      </view>
+
+      <!-- 留声机播放条 -->
+      <view 
+        class="audio-capsule-bar {{isPlayingAudio ? 'bar-active' : ''}}" 
+        wx:if="{{photoInfo.voiceUrl}}" 
+        catchtap="toggleAudioPlayback">
+        <view class="audio-play-icon">{{isPlayingAudio ? '⏸' : '▶'}}</view>
+        <view class="audio-track-info">
+          <text class="track-title">{{isPlayingAudio ? '正在播放现场留声...' : '定格时空原声'}}</text>
+          <text class="track-duration">
+            <block wx:if="{{isPlayingAudio}}">{{currentPlaySec}}s / {{displayDuration}}s</block>
+            <block wx:else>{{displayDuration}} 秒</block>
+          </text>
+        </view>
+        <view class="audio-waveform-static" wx:if="{{!isPlayingAudio}}">ılılılllı</view>
+        <view class="audio-waveform-dynamic" wx:else>
+          <view class="live-bar a1"></view><view class="live-bar a2"></view>
+          <view class="live-bar a3"></view><view class="live-bar a4"></view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+<!-- 3. 标准化等宽四大交互工具栏 -->
+<view class="action-grid-fixed">
+  <view class="action-col ripple-tap" bindtap="saveToLocalAlbum">
+    <view class="action-circle">💾</view>
+    <text class="action-text">存至相册</text>
+  </view>
+
+  <view class="action-col ripple-tap" bindtap="generatePoster">
+    <view class="action-circle poster-circle">🎨</view>
+    <text class="action-text poster-text">拍立得海报</text>
+  </view>
+
+  <view class="action-col ripple-tap" bindtap="previewFullImage">
+    <view class="action-circle">🔍</view>
+    <text class="action-text">全屏预览</text>
+  </view>
+
+  <button class="action-col share-clean-btn ripple-tap" open-type="share">
+    <view class="action-circle">💌</view>
+    <text class="action-text">分享好友</text>
+  </button>
+</view>
+
+<!-- 4. 离屏 Canvas 2D 绘图容器 -->
+<canvas 
+  type="2d" 
+  id="posterCanvas" 
+  class="poster-canvas-hidden">
+</canvas>
+
+</view>

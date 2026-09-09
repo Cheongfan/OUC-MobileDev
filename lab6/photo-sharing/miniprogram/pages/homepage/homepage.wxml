@@ -1,0 +1,48 @@
+<!-- pages/homepage/homepage.wxml -->
+<view class="archive-container">
+
+<!-- 1. 顶部作者档案勋章面板 -->
+<view class="author-profile-card glass-panel">
+  <image class="profile-avatar" src="{{authorInfo.avatarUrl}}" mode="aspectFill" />
+  <view class="profile-meta">
+    <text class="profile-name">{{authorInfo.nickName}}</text>
+    <text class="profile-badge">定格时光的胶片旅人</text>
+  </view>
+  
+  <!-- 统计指标看版 -->
+  <view class="stats-ribbon">
+    <view class="stat-cell">
+      <text class="stat-num">{{authorPhotos.length}}</text>
+      <text class="stat-txt">胶卷作品</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-cell">
+      <text class="stat-num">{{totalLikes}}</text>
+      <text class="stat-txt">获赞认同</text>
+    </view>
+  </view>
+</view>
+
+<!-- 2. 作品画廊瀑布流 -->
+<view class="gallery-section">
+  <view class="gallery-title">🎞️ 该旅人的个人存档</view>
+  
+  <view class="gallery-grid">
+    <block wx:for="{{authorPhotos}}" wx:key="_id">
+      <view class="grid-card ripple-tap" bindtap="navToDetail" data-id="{{item._id}}">
+        <image class="grid-image" src="{{item.photoUrl}}" mode="aspectFill" lazy-load />
+        <view class="grid-card-overlay">
+          <text class="overlay-date">{{item.addDate}}</text>
+          <text class="overlay-like">❤️ {{item.likeCount || 0}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 空档案提示 -->
+  <view class="empty-archive" wx:if="{{authorPhotos.length === 0}}">
+    <text>该作者暂未封存任何胶片</text>
+  </view>
+</view>
+
+</view>
