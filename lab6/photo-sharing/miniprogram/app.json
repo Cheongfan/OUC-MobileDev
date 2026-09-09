@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/add/add",
+    "pages/detail/detail",
+    "pages/homepage/homepage"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#0F1115",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "Aura 时空留声馆",
+    "backgroundColor": "#0F1115",
+    "backgroundTextStyle": "dark"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要获取您的地理位置以在地图上打卡标记"
+    },
+    "scope.record": {
+      "desc": "录制留声胶囊需要使用您的麦克风权限"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
