@@ -1,0 +1,29 @@
+# 依赖包（根目录及所有子模块的依赖，如 entry/oh_modules）
+oh_modules/
+**/oh_modules/
+node_modules/
+**/node_modules/
+
+# 个人环境配置（严禁上传，包含个人电脑的 SDK 路径）
+/local.properties
+
+# IDE 与工程分析临时文件
+/.idea/
+*.iml
+/.appanalyzer/
+/.clangd/
+/.clang-format
+/.clang-tidy
+
+# 构建产物与缓存目录
+/.hvigor/
+**/build/
+.cxx/
+**/.test/
+
+# 个人备忘文件（如果无需开源可忽略）
+note.txt
+
+# 操作系统临时文件
+.DS_Store
+Thumbs.db
