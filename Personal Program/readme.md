@@ -59,10 +59,10 @@ Personal Program/                      # 个人项目根目录
 │   ├── app.wxss                       # 全局 Neo-Brutalism 样式与主题规范
 │   ├── project.config.json            # 微信开发者工具工程配置
 │   └── sitemap.json                   # 搜索索引配置
-├── resources/                         # 说明文档的图片资源
-├── readme.md                          # 说明文档（本文件）
 ├── Demo/                              # 真机演示Demo
-└── Summer-Survival_03.pptx            # 结课答辩演示文稿
+├── Summer-Survival_03.pptx            # 结课答辩演示文稿
+├── resources/                         # 说明文档的图片资源
+└── README.md                          # 说明文档（本文件）
 ```
 
 ---

@@ -16,7 +16,7 @@
 | **实验四** | 推箱子游戏 | 动态 Canvas 关卡预览、平滑位移插值与 4 方向脚踏动画、撤销栈 |  [📖 实验报告与源码](./lab4/)  | [√] |
 | **实验五** | 鸿蒙开发入门及计算器开发 | ArkTS 声明式开发、逆波兰计算引擎、多功能计算器（科学/程序员）、HTTP 实时网络汇率 | [📖 实验报告与源码](./lab5/) | [√] |
 | **实验六** | 微信小程序云开发 | 云数据库与存储协同、足迹地图平移联动、摇一摇重力显影、Canvas 2D 动态海报合成 | [📖 实验报告与源码](./lab6/) | [√] |
-| **个人项目** |  |   |   | [待更新 ] |
+| **个人项目** | Summer Survival——暑假生存模拟器 | Neo-Brutalism 硬边框实体阴影、自定义 TabBar、卡牌滑动抉择、云托管流式 AI 、端侧正则容错、 三级降级容错、Web Audio 合成芯片音效 | [📖 实验报告与源码](./Personal Program/) | [√] |
 
 ---
 
@@ -28,15 +28,22 @@ OUC-MobileDev/                          # 课程总仓库根目录
 │   ├── hello-wx-miniprogram/           # 实验项目源码目录（每个 lab 名称不同）
 │   ├── report.md                       # 实验报告（.md）
 │   ├── report.pdf                      # 实验报告（.pdf）
-│   ├── README.md                       # 实验详细说明文档
-│   └── resources/                      # 文档配图资源
+│   ├── resources/                      # 文档配图资源
+│   └── README.md                       # 实验详细说明文档
 │
 ├── lab2/                               # 实验二：名片小程序（结构同上，源码目录：mini-card/）
 ├── lab3/                               # 实验三：高校新闻网（结构同上，源码目录：news_demo/）
 ├── lab4/                               # 实验四：推箱子游戏（结构同上，源码目录：sokoban-game/）
 ├── lab5/                               # 实验五：鸿蒙计算器开发（结构同上，源码目录：calculator/）
 ├── lab6/                               # 实验六：小程序云开发（结构同上，源码目录：photo-sharing/）
-├── Personal Program/                   # 个人项目（待更新）
+│
+├── Personal Program/                   # 个人项目《Summer Survival——暑假生存模拟器》
+│   ├── ai-proxy-deploy/                # 微信云托管后端源码
+│   ├── summer-survival/                # 小程序前端源码
+│   ├── Demo/                           # 项目真机演示
+│   ├── Summer-Survival_03.pptx         # 结课答辩演示文稿
+│   ├── resources/                      # 文档配图资源
+│   └── README.md                       # 个人项目详细说明文档
 │
 ├── .gitignore                          # Git 忽略配置文件
 ├── LICENSE                             # 开源许可
