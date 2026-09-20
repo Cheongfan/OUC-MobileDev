@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/arcade/arcade",
+    "pages/collection/collection",
+    "pages/ranking/ranking",
+    "pages/profile/profile",
+    "pages/game/game",
+    "pages/settlement/settlement",
+    "pages/settings/settings",
+    "pages/about/about",
+    "pages/arcade/drive/drive",
+    "pages/arcade/sneak/sneak",
+    "pages/arcade/rush/rush",
+    "pages/arcade/pack/pack",
+    "pages/arcade/schedule/schedule",
+    "pages/arcade/multitask/multitask"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FDFBF7",
+    "navigationBarTitleText": "暑假重开模拟器",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FDFBF7",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#78716C",
+    "selectedColor": "#FF5353",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "主页" },
+      { "pagePath": "pages/arcade/arcade", "text": "游戏厅" },
+      { "pagePath": "pages/collection/collection", "text": "成就" },
+      { "pagePath": "pages/ranking/ranking", "text": "排行榜" },
+      { "pagePath": "pages/profile/profile", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
