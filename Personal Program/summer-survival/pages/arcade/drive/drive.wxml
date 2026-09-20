@@ -1,0 +1,94 @@
+<!-- pages/arcade/drive/drive.wxml -->
+<view class="drive-stage flex-column">
+  <!-- 1. 顶部：教练情绪与血压监测仪 -->
+  <view class="coach-hud brutal-box flex-between">
+    <view class="coach-avatar-box flex-center">
+      <text class="coach-avatar">{{ coachFace }}</text>
+    </view>
+    <view class="coach-status-col flex-column">
+      <view class="status-title-row flex-between">
+        <text class="coach-name">老教练 · 咆哮监控</text>
+        <text class="bp-val" style="{{ bpColorStyle }}">血压: {{ coachBp }} mmHg</text>
+      </view>
+      <view class="bp-track">
+        <view class="bp-fill" style="{{ bpFillStyle }}"></view>
+      </view>
+      <text class="coach-dialogue">“{{ coachQuote }}”</text>
+    </view>
+  </view>
+
+  <!-- 2. 双侧后视镜视界 -->
+  <view class="mirrors-row flex-between">
+    <view class="mirror-box brutal-box flex-column flex-center">
+      <text class="mirror-tag">左后视镜</text>
+      <view class="mirror-glass flex-center">
+        <view class="curb-line-left"></view>
+        <view class="wheel-marker wheel-left" style="{{ leftWheelStyle }}"></view>
+      </view>
+      <text class="mirror-dist">库角标距: {{ leftDist }}cm</text>
+    </view>
+
+    <view class="mirror-box brutal-box flex-column flex-center">
+      <text class="mirror-tag">右后视镜</text>
+      <view class="mirror-glass flex-center">
+        <view class="curb-line-right"></view>
+        <view class="wheel-marker wheel-right" style="{{ rightWheelStyle }}"></view>
+      </view>
+      <text class="mirror-dist">库角标距: {{ rightDist }}cm</text>
+    </view>
+  </view>
+
+  <!-- 3. 中央高空鸟瞰实操考场 -->
+  <view class="aerial-bay brutal-box">
+    <view class="bay-ground">
+      <view class="bay-dashed-line"></view>
+      <view class="target-slot">
+        <view class="perfect-core flex-center">
+          <text class="perfect-text">💯 100分 标定终线</text>
+        </view>
+      </view>
+      <view class="dead-wall flex-center">
+        <text class="dead-wall-text">⚠️ 库底水泥防撞梁 ⚠️</text>
+      </view>
+      <view class="car-body-entity flex-column flex-center" style="{{ carEntityStyle }}">
+        <view class="car-chassis flex-center">
+          <text class="car-icon">🚗</text>
+          <div class="brake-lamp brake-left {{ isBraked ? 'lamp-lit' : '' }}"></div>
+          <div class="brake-lamp brake-right {{ isBraked ? 'lamp-lit' : '' }}"></div>
+        </view>
+        <view class="car-license">学·科目二</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 4. 底部实体操纵台 -->
+  <view class="control-deck flex-between">
+    <view class="brake-btn-wrap" wx:if="{{ !isFinished }}">
+      <button class="brutal-btn slam-brake-btn {{ isBraked ? 'brake-held' : '' }}" bindtap="triggerBrake">
+        <text class="pedal-icon">🛑</text>
+        <text class="pedal-text">一脚踩死刹车！</text>
+      </button>
+    </view>
+
+    <!-- 结算卡片 -->
+    <!-- 结算卡片 -->
+    <view class="result-cockpit brutal-box flex-column" wx:if="{{ isFinished }}">
+      <view class="result-top-row flex-between" style="width: 100%; margin-bottom: 12rpx;">
+        <view class="result-score-col flex-column">
+          <!-- 🌟 修复嵌套 text 带来的布局隐患：改用横向 flex 容器包裹数字和单位，垂直居中对齐 -->
+          <view class="flex-center" style="justify-content: flex-start; gap: 6rpx;">
+            <text class="score-number">{{ finalScore }}</text>
+            <text class="score-unit">分</text>
+          </view>
+          <text class="score-verdict">{{ verdictText }}</text>
+        </view>
+        <button class="brutal-btn retry-action-btn" bindtap="confirmAndReturn">确认战果并返回 ▶</button>
+      </view>
+      
+      <!-- 居中的收益提示框 -->
+      <view wx:if="{{ rewardSummary }}" class="{{ finalScore >= 60 ? 'reward-success-box' : 'reward-fail-box' }}">
+        {{ rewardSummary }}
+      </view>
+    </view>
+  </view>
+</view>

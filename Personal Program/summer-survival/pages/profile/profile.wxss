@@ -1,0 +1,229 @@
+.profile-page {
+  padding: 24rpx 32rpx 180rpx; /* 适配底部 TabBar */
+  background-color: #FDFBF7;
+  min-height: 100vh;
+}
+
+.passport-card {
+  padding: 30rpx 28rpx;
+  background-color: #FFFFFF;
+  margin-bottom: 28rpx;
+}
+.passport-header {
+  border-bottom: 2rpx dashed #E7E5E4;
+  padding-bottom: 12rpx;
+  margin-bottom: 20rpx;
+}
+.passport-tag {
+  font-size: 20rpx;
+  font-family: monospace;
+  font-weight: 800;
+  color: #78716C;
+}
+
+.profile-row {
+  align-items: center;
+  margin-bottom: 28rpx;
+}
+.avatar-box {
+  width: 130rpx;
+  height: 130rpx;
+  background-color: #FFED66;
+  border-radius: 20rpx;
+}
+.avatar-emoji { font-size: 70rpx; }
+
+.identity-info {
+  flex: 1;
+  margin-left: 24rpx;
+}
+
+/* 昵称与右对齐的设置齿轮按钮 */
+.name-settings-row {
+  width: 100%;
+  align-items: center;
+}
+.user-nickname {
+  font-size: 36rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.gear-settings-btn {
+  width: 58rpx;
+  height: 58rpx;
+  border-radius: 12rpx;
+  background-color: #F4EFE6;
+}
+.gear-icon {
+  font-size: 32rpx;
+}
+
+.user-id {
+  font-size: 20rpx;
+  color: #78716C;
+  font-family: monospace;
+  margin: 4rpx 0 6rpx;
+}
+.title-pill {
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #FF5353;
+}
+
+.badge-wall {
+  border-top: 2rpx dashed #E7E5E4;
+  padding-top: 20rpx;
+}
+.wall-title {
+  font-size: 22rpx;
+  font-weight: 900;
+  margin-bottom: 14rpx;
+  color: #1C1917;
+}
+.badge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14rpx;
+}
+.badge-chip {
+  padding: 12rpx 14rpx;
+  background-color: #F4EFE6;
+  border: 2rpx solid #1C1917;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+.badge-chip.unlocked {
+  opacity: 1;
+  filter: none;
+  background-color: #FFFDF0;
+  box-shadow: 2rpx 2rpx 0rpx #1C1917;
+}
+.chip-icon { font-size: 28rpx; }
+.chip-text { font-size: 20rpx; font-weight: 800; }
+
+.stats-panel {
+  padding: 24rpx;
+  background-color: #FFFFFF;
+  margin-bottom: 28rpx;
+}
+.panel-title {
+  font-size: 24rpx;
+  font-weight: 900;
+  margin-bottom: 16rpx;
+}
+.panel-grid {
+  display: flex;
+  background-color: #F4EFE6;
+  border: 3rpx solid #1C1917;
+  border-radius: 16rpx;
+  padding: 18rpx 0;
+}
+.stat-col {
+  flex: 1;
+  border-right: 2rpx solid rgba(28, 25, 23, 0.15);
+}
+.stat-col:last-child { border-right: none; }
+.stat-val {
+  font-size: 36rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.stat-lbl {
+  font-size: 18rpx;
+  color: #78716C;
+  font-weight: 700;
+  margin-top: 4rpx;
+}
+
+.menu-group {
+  background-color: #FFFFFF;
+  padding: 0 20rpx;
+  margin-bottom: 30rpx;
+}
+.menu-item {
+  padding: 26rpx 6rpx;
+}
+.item-left { gap: 16rpx; }
+.item-icon { font-size: 32rpx; }
+.item-text {
+  font-size: 26rpx;
+  font-weight: 800;
+}
+.item-arrow {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #78716C;
+}
+
+/* 🌟 “关于作者”独立专区样式 */
+.about-author-section {
+  margin-bottom: 30rpx;
+}
+.about-section-header {
+  margin-bottom: 12rpx;
+  padding: 0 4rpx;
+}
+.about-sec-title {
+  font-size: 22rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.about-sec-tag {
+  font-size: 18rpx;
+  color: #9D4EDD;
+  font-weight: 800;
+}
+.about-special-card {
+  padding: 22rpx 20rpx;
+  background: linear-gradient(135deg, #FAF5FF 0%, #FFFFFF 100%) !important;
+  border-left: 10rpx solid #9D4EDD !important;
+}
+.about-special-left {
+  gap: 16rpx;
+  flex: 1;
+}
+.about-avatar-bubble {
+  width: 72rpx;
+  height: 72rpx;
+  background-color: #F1E7FE;
+  border: 3rpx solid #1C1917;
+  border-radius: 16rpx;
+  box-shadow: 2rpx 2rpx 0rpx #1C1917;
+}
+.about-emoji { font-size: 38rpx; }
+.about-main-name {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.about-sub-tip {
+  font-size: 18rpx;
+  color: #78716C;
+  font-weight: 700;
+  margin-top: 4rpx;
+}
+.about-arrow-badge {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 2rpx solid #1C1917;
+}
+.arrow-glyph {
+  font-size: 24rpx;
+  font-weight: 900;
+}
+
+.footer-sign {
+  text-align: center;
+  margin-top: 10rpx;
+}
+.sign-top {
+  font-size: 20rpx;
+  color: #A8A29E;
+  font-style: italic;
+}

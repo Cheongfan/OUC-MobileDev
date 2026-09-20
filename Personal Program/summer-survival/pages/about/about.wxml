@@ -1,0 +1,81 @@
+<!-- pages/about/about.wxml -->
+<view class="about-container">
+  <!-- 仿实体挂绳孔与工卡夹顶饰 -->
+  <view class="lanyard-hole flex-center">
+    <view class="hole-pill"></view>
+  </view>
+
+  <!-- 核心学生工卡实体卡片 -->
+  <view class="badge-card brutal-card">
+    <view class="badge-header flex-between">
+      <view class="badge-brand">SUMMER VACATION 2026</view>
+      <div class="brutal-badge">结课作品认证</div>
+    </view>
+
+    <!-- 头像与核心信息 -->
+    <view class="profile-section flex-between">
+      <view class="avatar-wrap">
+        <text class="avatar-emoji">👨‍💻</text>
+      </view>
+      <div class="profile-info flex-column">
+        <text class="student-name">Cheongfan</text>
+        <text class="student-title">全栈开发 / 移动端与小程序实训</text>
+        <text class="student-dept">计算机科学与技术 · 暑假在逃脆皮大学生</text>
+      </div>
+    </view>
+
+    <!-- 幽默自我鉴定 -->
+    <view class="memo-box">
+      <view class="memo-title">📌 暑假真实状态鉴定</view>
+      <view class="memo-content">
+        “精通各类外卖凑单满减，暑假期间在科目二与日行三万步特种兵旅行之间反复横跳。为了让大家能体验到原汁原味的大学生暑假，特此爆肝研发本模拟器。”
+      </view>
+    </view>
+
+    <!-- 底层工程技术栈 -->
+    <view class="tech-stack-title">🛠️ 底层工程核心技术栈</view>
+    <view class="tech-tags">
+      <text class="tag-item">原生 WXML / WXSS</text>
+      <text class="tag-item">Web Audio 芯片音效</text>
+      <text class="tag-item">硬件触觉震动 API</text>
+      <text class="tag-item">微信云托管容器</text>
+    </view>
+
+    <!-- 链接管理卡片区块（上下纵向排布，彻底告别遮挡，两按钮完美对齐） -->
+    <view class="link-cards-col flex-column">
+      <!-- 开源仓库卡片 -->
+      <view class="repo-box brutal-box flex-between">
+        <div class="repo-info flex-column">
+          <text class="repo-label">开源代码仓库 (GitHub)</text>
+          <text class="repo-url">{{ repoUrl }}</text>
+        </div>
+        <view class="brutal-btn brutal-btn-teal copy-btn flex-center" bindtap="copyRepoUrl">
+          <text class="copy-btn-txt">复制</text>
+        </view>
+      </view>
+
+      <!-- 个人博客卡片 -->
+      <view class="repo-box brutal-box flex-between">
+        <div class="repo-info flex-column">
+          <text class="repo-label">个人技术博客</text>
+          <text class="repo-url">{{ blogUrl }}</text>
+        </div>
+        <view class="brutal-btn brutal-btn-teal copy-btn flex-center" bindtap="copyBlogUrl">
+          <text class="copy-btn-txt">复制</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 给互评同学与老师的结课信 -->
+  <view class="letter-card brutal-card">
+    <view class="letter-title">💌 致各位评审同学 & 老师</view>
+    <view class="letter-text">
+      感谢打开本程序！项目坚持“真实、共鸣与极致手感”，不堆砌无用的假需求。如果能引起你的一丝共鸣并让你会心一笑，恳请赐予我们高分支持！
+    </view>
+    <view class="letter-sign flex-between">
+      <text class="egg-hint" bindtap="onEggClick">✨ ？？？ ({{ eggCount }}/5)</text>
+      <text class="date-str">2026 年盛夏</text>
+    </view>
+  </view>
+</view>

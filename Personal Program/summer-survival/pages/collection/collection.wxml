@@ -1,0 +1,95 @@
+<!-- pages/collection/collection.wxml -->
+<view class="collect-container">
+  <view class="progress-card brutal-box">
+    <view class="progress-header flex-between">
+      <view class="card-brand">POLAROID MEMORIES</view>
+      <view class="brutal-badge">结局: {{ unlockedCount }} / {{ totalCount }}</view>
+    </view>
+    <view class="progress-title">暑假多重宇宙图鉴</view>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" style="{{ progressStyle }}"></div>
+    </div>
+    <text class="progress-sub">通过在主线做出不同极端的决策，或使用自由辩解，解锁属于大学生的离谱奇葩结局！</text>
+  </view>
+
+  <view class="collection-tab-bar flex-between">
+    <view 
+      class="tab-pill brutal-box brutal-btn-active {{ currentTab === 'endings' ? 'active-tab' : '' }}" 
+      bindtap="switchTab" 
+      data-tab="endings">
+      <text class="tab-pill-txt">📸 拍立得结局墙</text>
+    </view>
+    <view 
+      class="tab-pill brutal-box brutal-btn-active {{ currentTab === 'quotes' ? 'active-tab' : '' }}" 
+      bindtap="switchTab" 
+      data-tab="quotes">
+      <text class="tab-pill-txt">🎙️ 自由辩解收纳 ({{ quotesList.length }})</text>
+    </view>
+  </view>
+
+  <view class="polaroid-grid" wx:if="{{ currentTab === 'endings' }}">
+    <block wx:for="{{ endingsList }}" wx:key="id">
+      <view 
+        class="polaroid-item brutal-box {{ item.unlocked ? '' : 'locked-item' }}"
+        bindtap="inspectEnding" 
+        data-item="{{ item }}">
+
+        <view class="washi-tape"></view>
+
+        <view class="photo-frame flex-center flex-column">
+          <text class="photo-emoji">{{ item.unlocked ? item.icon : '🔒' }}</text>
+          <text class="photo-level-badge" wx:if="{{ item.unlocked }}">{{ item.level }}级</text>
+        </view>
+
+        <view class="polaroid-caption flex-column">
+          <text class="caption-title">{{ item.unlocked ? item.title : '【神秘封印】' }}</text>
+          <text class="caption-tag">{{ item.unlocked ? item.tag : '达成特定条件解锁' }}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 选项卡 2：自由辩解战绩语录列表 -->
+  <view class="quotes-stream-wrap flex-column" wx:if="{{ currentTab === 'quotes' }}">
+    <block wx:for="{{ quotesList }}" wx:key="index">
+      <view class="quote-card brutal-box flex-column">
+        <view class="quote-card-top flex-between">
+          <div class="flex-center">
+            <text class="event-tag-badge">📌 {{ item.event }}</text>
+          </div>
+          <text class="quote-award-title">{{ item.title || '机智辩护' }}</text>
+        </view>
+        <view class="quote-main-statement">
+          <text class="statement-txt">“{{ item.bargain }}”</text>
+        </view>
+        <view class="quote-verdict-speech flex-between">
+          <text class="speech-content">NPC审判：{{ item.speech }}</text>
+          <text class="quote-status-badge {{ item.passed ? 'status-pass' : 'status-fail' }}">
+            {{ item.passed ? '成立' : '驳回' }}
+          </text>
+        </view>
+      </view>
+    </block>
+    
+    <view class="empty-quotes-box brutal-box flex-center flex-column" wx:if="{{ quotesList.length === 0 }}">
+      <text class="empty-emoji">📝</text>
+      <text class="empty-txt">暂无自由辩解战绩</text>
+      <text class="empty-sub">在主线遇到危机时，点击【自由辩解】向裁判阐述你的理由吧！</text>
+    </view>
+  </view>
+
+  <view class="modal-mask flex-center" wx:if="{{ activeModal }}" bindtap="closeModal">
+    <view class="modal-card brutal-box" catchtap="preventBubble">
+      <view class="modal-tape"></view>
+      <view class="modal-photo flex-center brutal-box">
+        <text class="modal-emoji">{{ activeModal.icon }}</text>
+      </view>
+      <div class="modal-title">{{ activeModal.title }}</div>
+      <div class="grade-badge-pill modal-badge">{{ activeModal.tag }} · {{ activeModal.level }}级结局</div>
+      <div class="modal-desc">{{ activeModal.desc }}</div>
+      <view class="brutal-box brutal-btn-active modal-close-btn flex-center" bindtap="closeModal">
+        <text class="modal-btn-txt">收入口袋</text>
+      </view>
+    </view>
+  </view>
+</view>

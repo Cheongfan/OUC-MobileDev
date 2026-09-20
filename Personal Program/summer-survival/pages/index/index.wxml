@@ -1,0 +1,104 @@
+<!-- pages/index/index.wxml -->
+<view class="home-wrapper {{ isNight ? 'theme-dark' : 'theme-light' }}">
+  <!-- 顶部状态栏：昼夜一键切换 -->
+  <view class="top-nav-bar flex-between">
+    <view class="campus-logo flex-center brutal-box">
+      <text class="logo-emoji">🍧</text>
+      <text class="logo-text">SUMMER VACATION 2026</text>
+    </view>
+    
+    <view class="night-toggle-btn brutal-box brutal-btn-active flex-center" bindtap="toggleNightMode">
+      <text class="toggle-icon">{{ isNight ? '🌙' : '☀️' }}</text>
+      <text class="toggle-text">{{ isNight ? '深夜模式' : '烈日当空' }}</text>
+    </view>
+  </view>
+
+  <!-- 核心主横幅卡片 -->
+  <view class="hero-stage brutal-box">
+    <view class="washi-tape-top"></view>
+    
+    <view class="hero-top-row flex-between">
+      <view class="grade-badge-pill">🎓 结课答辩特献</view>
+      <!-- 🌟 动态真实天气挂载位 -->
+      <text class="day-cycle-badge">{{ weatherText }}</text>
+    </view>
+
+    <view class="title-wrap">
+      <text class="title-sub">大学生的 60 天极限拉扯</text>
+      <text class="title-main">暑假生存·重开指南</text>
+    </view>
+
+    <text class="hero-quote">
+      “如果一切可以重来，你会在科目二教练破防前踩死刹车，还是在凌晨三点偷吃夜宵时不被老妈发现？”
+    </text>
+
+    <!-- 生存仪表速览（“苟活”修正为“生存”） -->
+    <view class="hero-meter-grid">
+      <view class="meter-item flex-column">
+        <text class="meter-val">{{ stats.totalRuns }}</text>
+        <text class="meter-lbl">重开周目</text>
+      </view>
+      <view class="meter-line"></view>
+      <view class="meter-item flex-column">
+        <text class="meter-val">{{ stats.maxDays }} 天</text>
+        <text class="meter-lbl">最长生存</text>
+      </view>
+      <view class="meter-line"></view>
+      <view class="meter-item flex-column">
+        <text class="meter-val">{{ stats.unlockedCount }}</text>
+        <text class="meter-lbl">回收结局</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 核心启动大按钮（“妈怒”修正为“妈见打指数”） -->
+  <view class="main-action-wrap" bindtap="startSurvival">
+    <view class="start-btn brutal-box brutal-btn-active flex-between">
+      <div class="btn-left flex-column">
+        <text class="btn-title">🔥 开始 60 天生存重开</text>
+        <text class="btn-subtitle">平衡体力 / 精神 / 钱包 / 妈见打指数</text>
+      </div>
+      <div class="btn-arrow-circle flex-center">
+        <text class="arrow-text">→</text>
+      </div>
+    </view>
+  </view>
+
+  <!-- 胶囊 UI：更新副标题 -->
+  <view class="glossy-capsule-row flex-between">
+    <!-- 1. 系统偏好 -->
+    <view class="glossy-pill-card pill-settings brutal-box brutal-btn-active flex-between" bindtap="navTo" data-url="/pages/settings/settings">
+      <view class="pill-left flex-center">
+        <view class="pill-icon-wrap flex-center">
+          <text class="pill-icon">⚙️</text>
+        </view>
+        <view class="pill-text-col flex-column">
+          <text class="pill-title">系统偏好</text>
+          <text class="pill-desc">个性化 / AI仪表盘</text>
+        </view>
+      </view>
+      <view class="gloss-shine-line"></view>
+      <text class="pill-arrow">→</text>
+    </view>
+
+    <!-- 2. 关于作者 -->
+    <view class="glossy-pill-card pill-about brutal-box brutal-btn-active flex-between" bindtap="navTo" data-url="/pages/about/about">
+      <view class="pill-left flex-center">
+        <view class="pill-icon-wrap flex-center">
+          <text class="pill-icon">🧑‍💻</text>
+        </view>
+        <view class="pill-text-col flex-column">
+          <text class="pill-title">关于作者</text>
+          <text class="pill-desc">结课致谢 / 开源仓库</text>
+        </view>
+      </view>
+      <view class="gloss-shine-line"></view>
+      <text class="pill-arrow">→</text>
+    </view>
+  </view>
+
+  <view class="footer-sign flex-center flex-column">
+    <text class="sign-top">“致终将开学的盛夏生活与自由灵魂”</text>
+    <text class="sign-bottom">CAMPUS INDIE LAB · NATIVE ENGINE</text>
+  </view>
+</view>

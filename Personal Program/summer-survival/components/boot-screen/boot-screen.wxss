@@ -1,0 +1,79 @@
+.boot-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #121316;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+.boot-fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* CRT 扫描线显像管视效 */
+.crt-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(18, 19, 22, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+  background-size: 100% 6rpx;
+  pointer-events: none;
+}
+
+.boot-content {
+  width: 80%;
+  text-align: center;
+}
+.cassette-icon {
+  font-size: 90rpx;
+  margin-bottom: 24rpx;
+}
+.bios-title {
+  font-size: 36rpx;
+  font-weight: 900;
+  color: #06D6A0;
+  letter-spacing: 4rpx;
+  font-family: monospace;
+}
+.bios-sub {
+  font-size: 18rpx;
+  color: #78716C;
+  font-family: monospace;
+  margin: 8rpx 0 36rpx;
+}
+
+.boot-track {
+  width: 100%;
+  height: 20rpx;
+  background-color: #1E2025;
+  border: 3rpx solid #383D48;
+  border-radius: 99rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+.boot-fill {
+  height: 100%;
+  background-color: #FF5353;
+  transition: width 0.08s linear;
+}
+
+.boot-log-text {
+  font-size: 20rpx;
+  font-family: monospace;
+  color: #FFD23F;
+  min-height: 30rpx;
+}
+.skip-tip {
+  font-size: 18rpx;
+  color: #555A64;
+  margin-top: 40rpx;
+}

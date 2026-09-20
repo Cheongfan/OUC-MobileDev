@@ -1,0 +1,213 @@
+.rush-stage {
+  height: 100vh;
+  padding: 20rpx 28rpx 36rpx;
+  background-color: #FDFBF7;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* 票据抬头 */
+.ticket-slip {
+  padding: 22rpx 24rpx;
+  background-color: #FFFFFF;
+}
+.slip-header {
+  border-bottom: 2rpx dashed #E7E5E4;
+  padding-bottom: 12rpx;
+  margin-bottom: 16rpx;
+}
+.train-num {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.stock-badge {
+  font-size: 18rpx;
+  font-weight: 800;
+  background-color: #FF5353;
+  color: #FFFFFF;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+}
+.route-board {
+  padding: 6rpx 10rpx;
+}
+.station-side {
+  text-align: center;
+}
+.city-name {
+  font-size: 36rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.depart-time {
+  font-size: 20rpx;
+  color: #78716C;
+  font-weight: 700;
+}
+.mid-status-col {
+  padding: 0 10rpx;
+}
+.ping-pill {
+  font-size: 16rpx;
+  font-weight: 800;
+  font-family: monospace;
+}
+.mid-arrow {
+  font-size: 20rpx;
+  color: #06D6A0;
+  font-weight: 900;
+}
+
+/* 缓冲盾主仓 */
+.server-shield-bay {
+  flex: 1;
+  justify-content: center;
+}
+.clock-banner {
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+.clock-label {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #78716C;
+}
+.clock-sec {
+  font-size: 44rpx;
+  font-weight: 900;
+  color: #FF5353;
+  font-family: monospace;
+}
+
+.shield-hub {
+  width: 100%;
+  padding: 36rpx 28rpx;
+  background-color: #FFFFFF;
+}
+.shield-label {
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #78716C;
+}
+.shield-percent {
+  font-size: 88rpx;
+  font-weight: 900;
+  color: #1C1917;
+  font-family: monospace;
+  margin: 10rpx 0;
+}
+.shield-meter {
+  width: 100%;
+  height: 20rpx;
+  background-color: #F4EFE6;
+  border: 3rpx solid #1C1917;
+  border-radius: 99rpx;
+  overflow: hidden;
+}
+.shield-fill {
+  height: 100%;
+  transition: width 0.05s linear;
+}
+.tap-speed-meter {
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #A8A29E;
+  margin-top: 16rpx;
+}
+
+/* QTE 验证码弹窗 */
+.qte-modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(20, 21, 24, 0.7);
+  z-index: 1000;
+}
+.qte-card {
+  width: 580rpx;
+  padding: 36rpx;
+  background-color: #FFFFFF;
+}
+.qte-title {
+  font-size: 32rpx;
+  font-weight: 900;
+  color: #1C1917;
+  margin-bottom: 8rpx;
+}
+.qte-hint {
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #FF5353;
+  margin-bottom: 24rpx;
+}
+.qte-options-row {
+  width: 100%;
+  gap: 20rpx;
+}
+.qte-btn {
+  flex: 1;
+  height: 120rpx;
+  font-size: 60rpx;
+  background-color: #F4EFE6;
+}
+
+/* 底部操作区与结算 */
+.rush-deck {
+  width: 100%;
+}
+.slam-tap-button {
+  width: 100% !important;
+  padding: 34rpx 0 !important;
+  font-size: 36rpx;
+  background-color: #FF5353 !important;
+  color: #FFFFFF !important;
+}
+.frenzy-lit {
+  background-color: #FFD23F !important;
+  color: #1C1917 !important;
+  box-shadow: 0 0 24rpx #FFD23F !important;
+}
+
+.ticket-result {
+  width: 100%;
+  padding: 24rpx;
+  background-color: #FFFFFF;
+}
+.result-flag {
+  font-size: 30rpx;
+  font-weight: 900;
+  color: #1C1917;
+  margin-bottom: 8rpx;
+}
+.result-score-val {
+  font-size: 26rpx;
+  font-weight: 800;
+  color: #06D6A0;
+  margin-bottom: 16rpx;
+}
+.retry-ticket-btn {
+  width: 100% !important;
+  background-color: #FFED66 !important;
+  color: #1C1917 !important;
+}
+
+/* 确保各个小游戏结算弹窗中的收益提示文字垂直绝对居中 */
+.reward-success-box, .reward-fail-box {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center;
+  box-sizing: border-box;
+  min-height: 56rpx;
+}
+.reward-success-box {
+  background-color: #DCFCE7 !important;
+  color: #15803D !important;
+}
+.reward-fail-box {
+  background-color: #FEE2E2 !important;
+  color: #B91C1C !important;
+}

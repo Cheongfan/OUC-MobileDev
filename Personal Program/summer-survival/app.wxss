@@ -1,0 +1,151 @@
+/**
+ * app.wxss - 稳固版原子样式与主题规范
+ */
+ page {
+  box-sizing: border-box;
+  background-color: #FDFBF7;
+  color: #1C1917;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+view, text, button, scroll-view {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   核心实体组件：Neo-Brutalism 硬边框 + 实体阴影 (双保险防塌)
+   ========================================================= */
+.brutal-box {
+  background-color: #FFFFFF;
+  border: 4rpx solid #1C1917;
+  border-radius: 24rpx;
+  box-shadow: 6rpx 6rpx 0rpx #1C1917;
+  position: relative;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.brutal-btn-active:active {
+  transform: translate(3rpx, 3rpx) !important;
+  box-shadow: 2rpx 2rpx 0rpx #1C1917 !important;
+}
+
+/* 经典通用弹性盒工具类 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 经典波普色调角标 */
+.grade-badge-pill {
+  display: inline-block;
+  font-size: 20rpx;
+  font-weight: 800;
+  padding: 4rpx 14rpx;
+  border-radius: 99rpx;
+  border: 3rpx solid #1C1917;
+  background-color: #06D6A0;
+  color: #1C1917;
+  box-shadow: 2rpx 2rpx 0rpx #1C1917;
+}
+
+/* =========================================================
+   真实黑夜模式深度适配 (直接类级覆盖，绝不失效)
+   ========================================================= */
+.theme-dark {
+  background-color: #141518 !important;
+  color: #F5F5F7 !important;
+}
+
+.theme-dark .brutal-box {
+  background-color: #1E2025 !important;
+  border-color: #4A5060 !important;
+  box-shadow: 6rpx 6rpx 0rpx #090A0C !important;
+  color: #F5F5F7 !important;
+}
+
+.theme-dark text {
+  color: inherit;
+}
+
+/* =========================================================
+   全局按钮/卡片交互动效强化引擎 (物理按压 + 弹性回弹)
+   ========================================================= */
+
+/* 通用交互按压：实体沉降感 */
+.brutal-btn, .brutal-btn-active, [bindtap] {
+  transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.4, 1), 
+              box-shadow 0.08s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
+}
+
+/* 按压态：实体硬阴影收缩，元素沿45度轴平移并产生0.97微缩放 */
+.brutal-btn:active, .brutal-btn-active:active {
+  transform: translate(4rpx, 4rpx) scale(0.98) !important;
+  box-shadow: 2rpx 2rpx 0rpx #1C1917 !important;
+}
+
+/* 呼吸式闪烁高光（用于排行榜前三、特殊提示） */
+@keyframes neonGlow {
+  0%, 100% {
+    box-shadow: 6rpx 6rpx 0rpx #1C1917, 0 0 10rpx rgba(255, 83, 83, 0.3);
+  }
+  50% {
+    box-shadow: 6rpx 6rpx 0rpx #1C1917, 0 0 24rpx rgba(255, 83, 83, 0.7);
+  }
+}
+.glow-effect {
+  animation: neonGlow 2s infinite ease-in-out;
+}
+
+/* 页面入场微上浮动效 */
+@keyframes pageSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-anim-enter {
+  animation: pageSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* =========================================================
+   🌟 全局统一样式：全游戏 6 个小游戏收益提示框完美垂直水平居中
+   ========================================================= */
+.reward-success-box, .reward-fail-box, .reward-box-common {
+  font-size: 20rpx;
+  font-weight: 900;
+  padding: 16rpx 14rpx !important;
+  border-radius: 8rpx;
+  border: 2rpx solid #1C1917;
+  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 1.2;
+}
+.reward-success-box {
+  background-color: #DCFCE7 !important;
+  color: #15803D !important;
+}
+.reward-fail-box {
+  background-color: #FEE2E2 !important;
+  color: #B91C1C !important;
+}

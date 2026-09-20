@@ -1,0 +1,150 @@
+<!-- pages/settings/settings.wxml -->
+<view class="settings-container {{ settings.manualNightMode ? 'theme-dark' : 'theme-light' }}">
+  <!-- 标题说明 -->
+  <view class="header-section flex-between">
+    <div class="flex-column">
+      <text class="text-title-large">⚙️ 系统偏好与AI仪表盘</text>
+      <text class="text-caption">个性化配置触感、视听体验与 DeepSeek 智能体</text>
+    </div>
+  </view>
+
+  <!-- 设置组 1：交互与视听反馈 -->
+  <view class="brutal-box setting-group">
+    <view class="group-title flex-between">
+      <text>🎮 交互与视听</text>
+      <text class="group-sub-tag">硬件协同</text>
+    </view>
+
+    <!-- 硬件触觉震动开关 -->
+    <view class="setting-row flex-between">
+      <div class="row-info flex-column">
+        <text class="row-label">物理触觉震动</text>
+        <text class="row-desc">左右滑动卡牌与交互时的微震动反馈</text>
+      </div>
+      <switch checked="{{ settings.haptics }}" color="#06D6A0" bindchange="onHapticsToggle" />
+    </view>
+
+    <!-- 震动强度选择 -->
+    <view class="setting-row flex-between" wx:if="{{ settings.haptics }}">
+      <div class="row-info flex-column">
+        <text class="row-label">震动强度挡位</text>
+        <text class="row-desc">轻柔触感 / 街机实体 / 强烈冲击</text>
+      </div>
+      <div class="intensity-group">
+        <div 
+          class="intensity-tag brutal-box brutal-btn-active {{ settings.vibrationIntensity === 'light' ? 'active' : '' }}" 
+          data-val="light" 
+          bindtap="onIntensityChange">
+          <text>轻微</text>
+        </div>
+        <div 
+          class="intensity-tag brutal-box brutal-btn-active {{ settings.vibrationIntensity === 'medium' ? 'active' : '' }}" 
+          data-val="medium" 
+          bindtap="onIntensityChange">
+          <text>适中</text>
+        </div>
+        <div 
+          class="intensity-tag brutal-box brutal-btn-active {{ settings.vibrationIntensity === 'heavy' ? 'active' : '' }}" 
+          data-val="heavy" 
+          bindtap="onIntensityChange">
+          <text>强烈</text>
+        </div>
+      </div>
+    </view>
+
+    <!-- 合成音效开关（删除了括号内的无网络依赖） -->
+    <view class="setting-row flex-between">
+      <div class="row-info flex-column">
+        <text class="row-label">交互音效 (SFX)</text>
+        <text class="row-desc">离线合成芯片音效</text>
+      </div>
+      <switch checked="{{ settings.sfx }}" color="#FF5353" bindchange="onSfxToggle" />
+    </view>
+
+    <!-- 昼夜模式切换 -->
+    <view class="setting-row flex-between">
+      <div class="row-info flex-column">
+        <text class="row-label">深夜暗色模式 (Dark Mode)</text>
+        <text class="row-desc">模拟大学生通宵修仙高对比度视界</text>
+      </div>
+      <switch checked="{{ settings.manualNightMode }}" color="#9D4EDD" bindchange="onNightToggle" />
+    </view>
+  </view>
+
+  <!-- 设置组 2：微信云托管中继与容错观测 -->
+  <view class="brutal-box setting-group group-ai-border">
+    <view class="group-title flex-between">
+      <div class="flex-center">
+        <text class="ai-title-icon">🤖</text>
+        <text>DeepSeek 微信云托管中继</text>
+      </div>
+      <div class="status-indicator-pill flex-center">
+        <text class="pulse-indicator-dot {{ pingStatus.online ? 'dot-online' : 'dot-offline' }}"></text>
+        <text class="indicator-text">{{ pingStatus.text }}</text>
+      </div>
+    </view>
+
+    <view class="metrics-grid flex-between">
+      <div class="metric-cell brutal-box flex-column flex-center">
+        <text class="metric-num">{{ aiStats.totalRequests }}</text>
+        <text class="metric-name">辩解推演总数</text>
+      </div>
+      <div class="metric-cell brutal-box flex-column flex-center">
+        <text class="metric-num">{{ aiStats.passedCount }}</text>
+        <text class="metric-name">狡辩成功次数</text>
+      </div>
+      <div class="metric-cell brutal-box flex-column flex-center">
+        <text class="metric-num">{{ fallbackPctText }}</text>
+        <text class="metric-name">L2/L3降级率</text>
+      </div>
+    </view>
+
+    <view class="proxy-config-group flex-column">
+      <view class="proxy-title-row flex-between">
+        <text class="proxy-label">云托管服务 (Container Service)</text>
+        <text class="ping-badge" wx:if="{{ pingStatus.latencyText }}">{{ pingStatus.latencyText }}</text>
+      </view>
+      <view class="proxy-input-row flex-between">
+        <div class="cloud-service-badge brutal-box flex-between">
+          <text class="cloud-icon">☁️</text>
+          <text class="cloud-name">deepseek-proxy</text>
+          <text class="cloud-status-tag">线上版本已激活</text>
+        </div>
+        <div class="ping-btn brutal-box brutal-btn-active flex-center" bindtap="pingProxy">
+          <text class="ping-btn-txt">{{ isPinging ? '检测中...' : '⚡ 探测云延迟' }}</text>
+        </div>
+      </view>
+      <text class="proxy-hint">💡 采用微信云托管内网通信链路，零本地依赖，微信端原生安全鉴权。</text>
+    </view>
+
+    <view class="spec-note-box flex-column">
+      <view class="spec-header flex-between">
+        <text class="spec-title">🛡️ 健壮性与架构规范</text>
+        <text class="spec-tag">Cloud Native</text>
+      </view>
+      <text class="spec-item">• 架构：wx.cloud.callContainer + enableChunked 流式管道；</text>
+      <text class="spec-item">• 安全：API Key 与 System Prompt 驻留云托管 Docker 容器，无泄漏隐患；</text>
+      <text class="spec-item">• 高可用：若云服务冷启动或超时（>3.8s），自动无缝平滑切至 L2 离线词典。</text>
+    </view>
+  </view>
+
+  <!-- 设置组 3：存档管理 -->
+  <view class="brutal-box setting-group">
+    <view class="group-title">💾 存档与重置</view>
+    <view class="setting-row flex-between">
+      <div class="row-info flex-column">
+        <text class="row-label">清空全部存档数据</text>
+        <text class="row-desc">重置已解锁结局、小游戏最高分与历史记录</text>
+      </div>
+      <div class="danger-btn brutal-box brutal-btn-active flex-center" bindtap="confirmResetData">
+        <text class="danger-btn-text">清空重置</text>
+      </div>
+    </view>
+  </view>
+
+  <view class="version-section flex-center flex-column" bindtap="onVersionTap">
+    <text class="version-text">暑假重开模拟器 v2.0.0 (DeepSeek Enhanced)</text>
+    <text class="version-sub">原生微信引擎 · 双模 AI 流式渲染</text>
+    <text class="debug-hint" wx:if="{{ devTapCount > 0 }}">再点击 {{ 5 - devTapCount }} 次开启作弊终端</text>
+  </view>
+</view>

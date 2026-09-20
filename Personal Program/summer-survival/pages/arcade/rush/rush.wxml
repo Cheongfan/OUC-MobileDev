@@ -1,0 +1,79 @@
+<view class="rush-stage flex-column">
+  <view class="ticket-slip brutal-box">
+    <view class="slip-header flex-between">
+      <view class="flex-center" style="gap: 10rpx;">
+        <view class="back-pill brutal-box brutal-btn-active flex-center" bindtap="onBackClick" style="padding: 4rpx 14rpx; background: #F4EFE6;">
+          <text style="font-size: 20rpx; font-weight: 900;">◀ 返回</text>
+        </view>
+        <text class="train-num">🚄 K202X次 特种兵硬座专列</text>
+      </view>
+      <view class="stock-badge">余票: 1 张</view>
+    </view>
+    <view class="route-board flex-between">
+      <view class="station-side flex-column">
+        <text class="city-name">学校宿舍</text>
+        <text class="depart-time">23:59 发车</text>
+      </view>
+      <view class="mid-status-col flex-column flex-center">
+        <text class="ping-pill" style="{{ pingColorStyle }}">延时: {{ ping }}ms</text>
+        <text class="mid-arrow">════▶</text>
+      </view>
+      <view class="station-side flex-column">
+        <text class="city-name">泰山脚下</text>
+        <text class="depart-time">04:30 登顶</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="server-shield-bay flex-column flex-center">
+    <view class="clock-banner flex-center">
+      <text class="clock-label">抢票死线倒计时:</text>
+      <text class="clock-sec">{{ countdownSec }}s</text>
+    </view>
+
+    <view class="shield-hub brutal-box flex-column flex-center">
+      <text class="shield-label">12306 排队防御力场</text>
+      <text class="shield-percent">{{ shieldHp }}%</text>
+      <view class="shield-meter">
+        <view class="shield-fill" style="{{ shieldFillStyle }}"></view>
+      </view>
+      <text class="tap-speed-meter">累计狂击: {{ totalTaps }} 次 · 手速: {{ currentCps }} taps/s</text>
+    </view>
+  </view>
+
+  <view class="qte-modal-mask flex-center" wx:if="{{ isQteActive }}">
+    <view class="qte-card brutal-box flex-column flex-center">
+      <text class="qte-title">🤖 12306 安全验证</text>
+      <text class="qte-hint">请在 1.5 秒内精准点击【大黄鸭】破盾！</text>
+      <view class="qte-options-row flex-between">
+        <view class="qte-btn brutal-box flex-center" bindtap="handleQteChoice" data-val="fox">🦊</view>
+        <view class="qte-btn brutal-box flex-center" bindtap="handleQteChoice" data-val="duck">🦆</view>
+        <view class="qte-btn brutal-box flex-center" bindtap="handleQteChoice" data-val="rabbit">🐰</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="rush-deck">
+    <button 
+      class="brutal-btn slam-tap-button {{ isFrenzyMode ? 'frenzy-lit' : '' }}" 
+      bindtap="onTapStrike" 
+      wx:if="{{ !isFinished }}">
+      🔥 {{ isFrenzyMode ? '⚡ 暴击狂暴充能中！' : '疯狂猛击提交订单！' }}
+    </button>
+
+    <view class="ticket-result brutal-box flex-column flex-center" wx:if="{{ isFinished }}">
+      <view class="result-flag">{{ isSuccess ? '🎉 出票成功！泰山在召唤！' : '💔 抢票失败：已候补至第 9999 名' }}</view>
+      <view class="result-score-val" style="margin-bottom: 10rpx;">最终手速评定: {{ finalScore }} 分</view>
+      
+      <!-- 收益提示框 -->
+      <view class="{{ isSuccess ? 'reward-success-box' : 'reward-fail-box' }}" style="margin-bottom: 14rpx; width: 100%; text-align: center;">
+        {{ rewardSummary }}
+      </view>
+
+      <!-- 动态按钮：如果来自主线，显示确认战果并返回；如果来自街机厅，显示重新开抢 -->
+      <button class="brutal-btn retry-ticket-btn" bindtap="confirmAndReturn">
+        {{ fromMain ? '🏆 确认战果并返回主线' : '🔄 重新开抢' }}
+      </button>
+    </view>
+  </view>
+</view>

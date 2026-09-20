@@ -1,0 +1,291 @@
+.collect-container {
+  padding: 24rpx 28rpx 140rpx;
+  background-color: #FDFBF7;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 进度卡片 */
+.progress-card {
+  background-color: #FFFFFF;
+  margin-bottom: 24rpx;
+  padding: 24rpx;
+}
+.card-brand {
+  font-size: 20rpx;
+  font-weight: 900;
+  letter-spacing: 2rpx;
+  color: #78716C;
+}
+.brutal-badge {
+  font-size: 20rpx;
+  font-weight: 800;
+  background-color: #FFED66;
+  border: 2rpx solid #1C1917;
+  padding: 4rpx 12rpx;
+  border-radius: 99rpx;
+}
+.progress-title {
+  font-size: 34rpx;
+  font-weight: 900;
+  margin: 10rpx 0 14rpx;
+}
+.progress-bar-wrap {
+  width: 100%;
+  height: 16rpx;
+  background-color: #F4EFE6;
+  border: 2rpx solid #1C1917;
+  border-radius: 99rpx;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+}
+.progress-bar-fill {
+  height: 100%;
+  background-color: #06D6A0;
+  transition: width 0.4s ease;
+}
+.progress-sub {
+  font-size: 20rpx;
+  color: #78716C;
+  line-height: 1.5;
+}
+
+/* 切换 Tab 条 */
+.collection-tab-bar {
+  gap: 14rpx;
+  margin-bottom: 24rpx;
+}
+.tab-pill {
+  flex: 1;
+  padding: 16rpx 0;
+  background-color: #FFFFFF;
+  text-align: center;
+  border-radius: 12rpx;
+}
+.active-tab {
+  background-color: #FFED66 !important;
+}
+.tab-pill-txt {
+  font-size: 22rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+
+/* 拍立得照片墙 */
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.polaroid-item {
+  background-color: #FFFFFF;
+  padding: 14rpx 14rpx 20rpx;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+/* 和纸胶带装饰 */
+.washi-tape {
+  position: absolute;
+  top: -12rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80rpx;
+  height: 20rpx;
+  background-color: rgba(255, 237, 102, 0.85);
+  border: 2rpx dashed #1C1917;
+}
+
+.photo-frame {
+  width: 100%;
+  height: 200rpx;
+  background-color: #FDFBF7;
+  border: 3rpx solid #1C1917;
+  border-radius: 12rpx;
+  position: relative;
+  margin-top: 8rpx;
+}
+.photo-emoji {
+  font-size: 76rpx;
+}
+.photo-level-badge {
+  position: absolute;
+  right: 6rpx;
+  top: 6rpx;
+  font-size: 16rpx;
+  font-weight: 900;
+  background-color: #FF5353;
+  color: #FFFFFF;
+  border: 2rpx solid #1C1917;
+  border-radius: 6rpx;
+  padding: 2rpx 6rpx;
+}
+
+.polaroid-caption {
+  margin-top: 12rpx;
+  text-align: center;
+}
+.caption-title {
+  font-size: 22rpx;
+  font-weight: 900;
+  color: #1C1917;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.caption-tag {
+  font-size: 16rpx;
+  color: #78716C;
+  font-weight: 800;
+  margin-top: 4rpx;
+}
+
+/* 未解锁滤镜置灰 */
+.locked-item .photo-frame {
+  background-color: #E7E5E4;
+}
+.locked-item .photo-emoji {
+  opacity: 0.35;
+}
+.locked-item .caption-title {
+  color: #A8A29E;
+}
+
+/* 🌟 新增 AI 口胡战绩流卡片 */
+.quotes-stream-wrap {
+  gap: 16rpx;
+}
+.quote-card {
+  background-color: #FFFFFF;
+  padding: 20rpx;
+  border-radius: 16rpx;
+}
+.quote-card-top {
+  margin-bottom: 8rpx;
+}
+.event-tag-badge {
+  font-size: 18rpx;
+  font-weight: 900;
+  color: #78716C;
+}
+.quote-award-title {
+  font-size: 18rpx;
+  font-weight: 900;
+  background-color: #FFED66;
+  border: 2rpx solid #1C1917;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+}
+.quote-main-statement {
+  margin: 6rpx 0 10rpx;
+}
+.statement-txt {
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #1C1917;
+  line-height: 1.4;
+}
+.quote-verdict-speech {
+  border-top: 2rpx dashed #E7E5E4;
+  padding-top: 8rpx;
+}
+.speech-content {
+  font-size: 18rpx;
+  color: #78716C;
+  font-weight: 700;
+  flex: 1;
+  margin-right: 12rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.quote-status-badge {
+  font-size: 16rpx;
+  font-weight: 900;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+}
+.status-pass { background-color: #06D6A0; color: #1C1917; }
+.status-fail { background-color: #FF5353; color: #FFFFFF; }
+
+.empty-quotes-box {
+  background-color: #FFFFFF;
+  padding: 40rpx 20rpx;
+  border-radius: 16rpx;
+  gap: 8rpx;
+}
+.empty-emoji { font-size: 60rpx; }
+.empty-txt { font-size: 24rpx; font-weight: 900; color: #1C1917; }
+.empty-sub { font-size: 18rpx; color: #78716C; text-align: center; }
+
+/* 详情弹窗 Modal (原有 100% 保留) */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(28, 25, 23, 0.65);
+  backdrop-filter: blur(4rpx);
+  z-index: 1000;
+  padding: 40rpx;
+}
+.modal-card {
+  width: 100%;
+  background-color: #FFFFFF;
+  text-align: center;
+  position: relative;
+  padding: 40rpx 30rpx;
+  border-radius: 24rpx;
+}
+.modal-tape {
+  position: absolute;
+  top: -16rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120rpx;
+  height: 26rpx;
+  background-color: #06D6A0;
+  border: 3rpx dashed #1C1917;
+}
+.modal-photo {
+  width: 150rpx;
+  height: 150rpx;
+  background-color: #FDFBF7;
+  border-radius: 20rpx;
+  margin: 10rpx auto 18rpx;
+}
+.modal-emoji {
+  font-size: 80rpx;
+}
+.modal-title {
+  font-size: 34rpx;
+  font-weight: 900;
+  margin-bottom: 8rpx;
+}
+.modal-badge {
+  margin-bottom: 18rpx;
+}
+.modal-desc {
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: #4A5568;
+  text-align: left;
+  background-color: #F8F9FA;
+  padding: 18rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #1C1917;
+  margin-bottom: 24rpx;
+}
+.modal-close-btn {
+  width: 100%;
+  padding: 20rpx 0;
+  background-color: #FFED66;
+  border-radius: 12rpx;
+}
+.modal-btn-txt {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #1C1917;
+}

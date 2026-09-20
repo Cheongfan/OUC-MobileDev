@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "暑假重开模拟器",
+  "navigationBarBackgroundColor": "#FFFDF7",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "boot-screen": "/components/boot-screen/boot-screen"
+  }
+}

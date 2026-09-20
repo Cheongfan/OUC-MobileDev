@@ -1,0 +1,95 @@
+.arcade-container {
+  padding: 30rpx 32rpx 180rpx;
+  background-color: #FDFBF7;
+  min-height: 100vh;
+}
+.arcade-hero {
+  background-color: #FFFFFF;
+  padding: 28rpx;
+  margin-bottom: 32rpx;
+}
+.coin-tip {
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #FF5353;
+}
+.hero-title {
+  font-size: 44rpx;
+  font-weight: 900;
+  margin: 16rpx 0 10rpx;
+  color: #1C1917;
+}
+.hero-desc {
+  font-size: 22rpx;
+  color: #78716C;
+  line-height: 1.5;
+}
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+.game-entry {
+  padding: 24rpx;
+  position: relative;
+  overflow: hidden;
+}
+.bg-drive { background-color: #FFF5EB !important; border-top: 10rpx solid #FF5353 !important; }
+.bg-sneak { background-color: #F5E8FF !important; border-top: 10rpx solid #9D4EDD !important; }
+.bg-rush { background-color: #E6FFFA !important; border-top: 10rpx solid #06D6A0 !important; }
+
+.entry-header {
+  border-bottom: 2rpx dashed #CBD5E0;
+  padding-bottom: 12rpx;
+  margin-bottom: 14rpx;
+}
+.game-badge {
+  font-size: 22rpx;
+  font-weight: 900;
+}
+.score-pill {
+  font-size: 20rpx;
+  font-weight: 800;
+  background-color: #FFFFFF;
+  border: 2rpx solid #1C1917;
+  border-radius: 99rpx;
+  padding: 4rpx 14rpx;
+}
+
+.entry-info {
+  flex: 1;
+  padding-right: 20rpx;
+}
+.game-title {
+  font-size: 32rpx;
+  font-weight: 900;
+  margin-bottom: 6rpx;
+  color: #1C1917;
+}
+.game-intro {
+  font-size: 22rpx;
+  color: #57534E;
+  line-height: 1.4;
+}
+
+/* 坚固的触控按键块，杜绝 native button 吞事件 */
+.entry-btn-touchable {
+  background-color: #FFED66;
+  border: 3rpx solid #1C1917;
+  border-radius: 14rpx;
+  box-shadow: 3rpx 3rpx 0rpx #1C1917;
+  padding: 16rpx 24rpx;
+}
+.touch-purple { background-color: #C77DFF !important; color: #FFFFFF; }
+.touch-teal { background-color: #06D6A0 !important; }
+.btn-touch-text {
+  font-size: 24rpx;
+  font-weight: 900;
+}
+.bg-pack { background-color: #FEFCBF !important; border-top: 10rpx solid #D69E2E !important; }
+.touch-yellow { background-color: #FFED66 !important; }
+
+.bg-schedule { background-color: #F3E8FF !important; border-top: 10rpx solid #9D4EDD !important; }
+.bg-multitask { background-color: #FFF5F5 !important; border-top: 10rpx solid #FF5353 !important; }
+.touch-red { background-color: #FF5353 !important; color: #FFFFFF !important; }

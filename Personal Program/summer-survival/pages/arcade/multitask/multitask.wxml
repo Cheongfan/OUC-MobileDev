@@ -1,0 +1,134 @@
+<view class="multitask-viewport flex-column">
+  <!-- 1. 顶部：大脑 CPU 负荷与极限存活计时器 -->
+  <view class="cpu-monitor-hud brutal-box flex-between">
+    <view class="timer-col flex-column">
+      <text class="hud-label">极限坚持时间</text>
+      <text class="survive-time">{{ surviveSec }} <text class="unit-s">秒</text></text>
+    </view>
+    <view class="stress-col flex-column">
+      <text class="stress-title-row flex-between">
+        <text class="stress-title">🧠 大脑 CPU 负载</text>
+        <text class="stress-pct {{ stressPct > 75 ? 'danger-blink' : '' }}">{{ stressPct }}%</text>
+      </text>
+      <view class="stress-track">
+        <view class="stress-fill" style="{{ stressFillStyle }}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 中层严格 50/50 左右分屏双战区 -->
+  <view class="dual-stream-row flex-between">
+    <!-- 👈 左半屏：线程 A (车道保持) -->
+    <view class="sub-stage thread-drive brutal-box flex-column">
+      <view class="thread-header flex-between">
+        <text class="thread-name">🚗 线程A:车道</text>
+        <text class="deviation-tag {{ isOffRoad ? 'tag-danger' : '' }}">{{ isOffRoad ? '⚠️压线' : '居中' }}</text>
+      </view>
+
+      <!-- 虚拟车道 -->
+      <view class="lane-track flex-center">
+        <view class="lane-curb-l"></view>
+        <view class="lane-curb-r"></view>
+        <view class="lane-center-line"></view>
+        <view class="moving-car" style="{{ carPosStyle }}">
+          <text class="car-glyph">🚙</text>
+        </view>
+      </view>
+
+      <!-- 方向微调触控块 -->
+      <view class="steer-btn-group flex-between">
+        <view class="steer-chip brutal-box brutal-btn-active flex-center" bindtap="nudgeCarLeft">
+          <text class="chip-text">◀ 左打</text>
+        </view>
+        <view class="steer-chip brutal-box brutal-btn-active flex-center" bindtap="nudgeCarRight">
+          <text class="chip-text">右打 ▶</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 👉 右半屏：线程 B (微信秒回) -->
+    <view class="sub-stage thread-wechat brutal-box flex-column">
+      <view class="thread-header flex-between">
+        <text class="thread-name">💬 线程B:微信</text>
+        <text class="chat-timer">倒计时:{{ chatTimeLeft }}s</text>
+      </view>
+
+      <!-- 对话通知气泡 -->
+      <view class="chat-bubble-view flex-column">
+        <text class="chat-sender">{{ currentMsg.sender }}</text>
+        <text class="chat-content">“{{ currentMsg.text }}”</text>
+      </view>
+
+      <!-- 选项快速回复块 -->
+      <view class="reply-actions-col flex-column">
+        <block wx:for="{{ currentMsg.options }}" wx:key="index">
+          <view 
+            class="reply-choice-chip brutal-box brutal-btn-active flex-center"
+            bindtap="onReplyChoice" 
+            data-correct="{{ item.isCorrect }}">
+            <text class="reply-text">{{ item.label }}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3. 底层全屏：线程 C (母上脚步突击雷达) -->
+  <view class="bottom-stage thread-radar brutal-box flex-between {{ isRaidWarning ? 'radar-alert-red' : '' }}">
+    <view class="radar-info flex-column">
+      <view class="radar-tag-row flex-between">
+        <text class="radar-title">👵 线程C: 母上查房雷达</text>
+        <text class="radar-status">{{ radarMsg }}</text>
+      </view>
+      <view class="radar-track">
+        <view class="radar-fill" style="{{ radarFillStyle }}"></view>
+      </view>
+    </view>
+
+    <view 
+      class="act-innocent-btn brutal-box brutal-btn-active flex-center {{ isRaidWarning ? 'btn-danger-flash' : '' }}" 
+      bindtap="onActInnocent">
+      <text class="btn-innocent-text">{{ isRaidWarning ? '🚨 假装学习！' : '保持乖巧' }}</text>
+    </view>
+  </view>
+
+  <!-- 4. 底部重置按钮 -->
+  <view class="action-footer">
+    <button class="brutal-btn reset-btn" bindtap="restartMultiTask">🔄 重置线程大脑</button>
+  </view>
+
+  <!-- 5. 脑过载宕机结算弹窗 -->
+  <view class="overload-modal-mask flex-center" wx:if="{{ isGameOver }}">
+    <view class="overload-dialog brutal-box flex-column flex-center">
+      <text class="overload-title">💥 大脑 CPU 彻底烧穿！</text>
+      <view class="overload-avatar-box flex-center">
+        <text class="overload-emoji">🤯</text>
+      </view>
+      <text class="overload-verdict">{{ gameOverVerdict }}</text>
+      
+      <view class="overload-stats flex-between">
+        <view class="ov-cell flex-column">
+          <text class="ov-val">{{ surviveSec }}秒</text>
+          <text class="ov-lbl">坚持存活</text>
+        </view>
+        <view class="ov-cell flex-column">
+          <text class="ov-val">{{ totalReplies }}条</text>
+          <text class="ov-lbl">应付消息</text>
+        </view>
+        <view class="ov-cell flex-column">
+          <text class="ov-val">{{ finalScore }}</text>
+          <text class="ov-lbl">总分</text>
+        </view>
+      </view>
+
+      <view class="flex-column" style="width: 100%; gap: 10rpx;">
+        <view class="{{ surviveSec >= 20 ? 'reward-success-box' : 'reward-fail-box' }}">
+          {{ rewardSummary }}
+        </view>
+        <button class="brutal-btn brutal-btn-primary play-again-btn" bindtap="confirmAndReturn">
+          🏆 确认战果并返回主线
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

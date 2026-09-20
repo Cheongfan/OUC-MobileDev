@@ -1,0 +1,113 @@
+<view class="arcade-container">
+  <view class="arcade-hero brutal-box">
+    <view class="hero-tag-row flex-between">
+      <view class="grade-badge-pill">CAMPUS RETRO ARCADE</view>
+      <text class="coin-tip">🪙 街机无限投币中</text>
+    </view>
+    <view class="hero-title">暑假摸鱼街机厅</view>
+    <view class="hero-desc">大学生痛点精选小游戏！磨砺你的车技、反应力、手速与空间几何收纳。</view>
+  </view>
+
+  <view class="game-list">
+    <!-- ⭐ 核心王牌新游：特种兵行李箱收纳 -->
+    <view class="game-entry brutal-box bg-pack brutal-btn-active" bindtap="playGame" data-url="/pages/arcade/pack/pack">
+      <view class="entry-header flex-between">
+        <text class="game-badge">🎒 空间收纳 · 核心自研</text>
+        <view class="score-pill">最高记录: {{ scores.pack || 0 }} 分</view>
+      </view>
+      <view class="entry-body flex-between">
+        <view class="entry-info">
+          <view class="game-title">特种兵：行李箱超载大作战</view>
+          <view class="game-intro">几何旋转摆放！充电宝不能挨着防晒喷雾，看你能塞进多少行李！</view>
+        </view>
+        <view class="entry-btn-touchable flex-center touch-yellow">
+          <text class="btn-touch-text">收纳 ▶</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- ⭐ 王牌新游 2：作息折叠方块消除 -->
+    <view class="game-entry brutal-box bg-schedule brutal-btn-active" bindtap="playGame" data-url="/pages/arcade/schedule/schedule">
+      <view class="entry-header flex-between">
+        <text class="game-badge">⏰ 时间消除 · 规律救赎</text>
+        <view class="score-pill">最高记录: {{ scores.schedule || 0 }} 分</view>
+      </view>
+      <view class="entry-body flex-between">
+        <view class="entry-info">
+          <view class="game-title">作息折叠：24小时时间消除</view>
+          <view class="game-intro">补觉、追剧与开黑挤爆作息！凑满整行消除时段，严防作息崩塌！</view>
+        </view>
+        <view class="entry-btn-touchable flex-center touch-purple">
+          <text class="btn-touch-text">消除 ▶</text>
+        </view>
+      </view>
+    </view>
+    <!-- ⭐ 王牌新游 3：多线程大学生分心模拟 -->
+    <view class="game-entry brutal-box bg-multitask brutal-btn-active" bindtap="playGame" data-url="/pages/arcade/multitask/multitask">
+      <view class="entry-header flex-between">
+        <text class="game-badge">🧠 极限并发 · 一心三用</text>
+        <view class="score-pill">最高纪录: {{ scores.multitask || 0 }} 分</view>
+      </view>
+      <view class="entry-body flex-between">
+        <view class="entry-info">
+          <view class="game-title">多线程：一心三用分心模拟</view>
+          <view class="game-intro">左手车道微调，右手秒回微信，眼睛死盯老妈脚步雷达！</view>
+        </view>
+        <view class="entry-btn-touchable flex-center touch-red">
+          <text class="btn-touch-text">分心 ▶</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 1. 科目二倒车入库 -->
+    <view class="game-entry brutal-box bg-drive brutal-btn-active" bindtap="playGame" data-url="/pages/arcade/drive/drive">
+      <view class="entry-header flex-between">
+        <text class="game-badge">🚗 驾考模拟</text>
+        <view class="score-pill">最高记录: {{ scores.drive || 0 }} 分</view>
+      </view>
+      <view class="entry-body flex-between">
+        <view class="entry-info">
+          <view class="game-title">科目二：非生即死倒车</view>
+          <view class="game-intro">双视角后视镜精准测距，在老教练破防前一脚定格！</view>
+        </view>
+        <view class="entry-btn-touchable flex-center">
+          <text class="btn-touch-text">开练 ▶</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 2. 凌晨三点母上查房 -->
+    <view class="game-entry brutal-box bg-sneak brutal-btn-active" bindtap="playGame" data-url="/pages/arcade/sneak/sneak">
+      <view class="entry-header flex-between">
+        <text class="game-badge">🛌 熬夜潜行</text>
+        <view class="score-pill">最高得分: {{ scores.sneak || 0 }} 分</view>
+      </view>
+      <view class="entry-body flex-between">
+        <view class="entry-info">
+          <view class="game-title">凌晨三点：母上查房伪装</view>
+          <view class="game-intro">心率实时监测！长按蒙头装睡，警惕门缝光影贪刀！</view>
+        </view>
+        <view class="entry-btn-touchable flex-center touch-purple">
+          <text class="btn-touch-text">潜行 ▶</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 3. 12306特惠抢票 -->
+    <view class="game-entry brutal-box bg-rush brutal-btn-active" bindtap="playGame" data-url="/pages/arcade/rush/rush">
+      <view class="entry-header flex-between">
+        <text class="game-badge">🚄 极速手速</text>
+        <view class="score-pill">最高纪录: {{ scores.rush || 0 }} 分</view>
+      </view>
+      <view class="entry-body flex-between">
+        <view class="entry-info">
+          <view class="game-title">特种兵：12306神之右手</view>
+          <view class="game-intro">对抗 999ms 网络风暴与图形验证码 QTE，拿下硬座！</view>
+        </view>
+        <view class="entry-btn-touchable flex-center touch-teal">
+          <text class="btn-touch-text">抢票 ▶</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

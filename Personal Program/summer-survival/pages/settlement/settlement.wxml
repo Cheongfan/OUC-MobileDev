@@ -1,0 +1,110 @@
+<!-- pages/settlement/settlement.wxml -->
+<view class="settle-container">
+  <!-- 仿复古打印凭条 / 拍立得大卡片 -->
+  <view class="receipt-card brutal-box">
+    <!-- 顶部打孔齿状视效装饰 -->
+    <view class="receipt-header flex-between">
+      <view class="receipt-brand">OFFICIAL CAMPUS REPORT</view>
+      <text class="receipt-no">NO. {{ reportNo }}</text>
+    </view>
+
+    <!-- 评级印章 -->
+    <view class="grade-stamp stamp-level-{{ ending.level || 'B' }}">
+      {{ ending.level || 'B' }} 级
+    </view>
+
+    <!-- 生存核心数据概览 -->
+    <view class="hero-status-row flex-between">
+      <view class="status-left flex-column">
+        <text class="sub-label">生存存活天数</text>
+        <text class="days-big">{{ days }} <text class="days-unit">天</text></text>
+      </view>
+      <view class="ending-icon-wrap flex-center brutal-box">
+        <text class="ending-emoji">{{ ending.icon || '🍉' }}</text>
+      </view>
+    </view>
+
+    <!-- 结局专属称号与定论 -->
+    <view class="title-section">
+      <view class="ending-tag-pill">{{ ending.tag || '突发退场' }}</view>
+      <view class="ending-title-text">{{ ending.title }}</view>
+    </view>
+
+    <!-- 结局深度文案 -->
+    <view class="desc-box">
+      <text class="desc-content">{{ ending.desc }}</text>
+    </view>
+
+    <!-- 离场体征速览 -->
+    <view class="final-stats-grid">
+      <view class="stat-cell flex-column">
+        <text class="cell-label">🔋 精力残余</text>
+        <text class="cell-val">{{ finalStats.stamina }}%</text>
+      </view>
+      <view class="stat-cell flex-column">
+        <text class="cell-label">💸 钱包结余</text>
+        <text class="cell-val">{{ finalStats.money }}%</text>
+      </view>
+      <view class="stat-cell flex-column">
+        <text class="cell-label">🧠 精神状态</text>
+        <text class="cell-val">{{ finalStats.sanity }}%</text>
+      </view>
+      <view class="stat-cell flex-column">
+        <text class="cell-label">⚡ 妈见打指数</text>
+        <text class="cell-val">{{ finalStats.rage }}%</text>
+      </view>
+    </view>
+
+    <!-- 🌟 自由辩解高光卡片（修复了渲染错位，结构更稳固） -->
+    <view class="ai-highlight-card brutal-box" wx:if="{{ latestAIQuote }}">
+      <view class="ai-highlight-header flex-between">
+        <view class="flex-center">
+          <text class="ai-badge-icon">🤖</text>
+          <text class="ai-badge-title">本局自由辩解高光</text>
+        </view>
+        <text class="ai-title-chip">{{ latestAIQuote.title || '机智辩护' }}</text>
+      </view>
+      <view class="ai-quote-content">
+        <text class="quote-mark">“</text>
+        <text class="quote-text">{{ latestAIQuote.bargain }}</text>
+        <text class="quote-mark">”</text>
+      </view>
+      <view class="ai-reply-preview flex-between">
+        <text class="ai-reply-label">NPC评语：{{ latestAIQuote.speech }}</text>
+        <view class="verdict-passed-tag {{ latestAIQuote.passed ? 'tag-pass' : 'tag-fail' }}">
+          {{ latestAIQuote.passed ? '✓ 狡辩成立' : '✕ 狡辩失败' }}
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部虚线撕纸口 -->
+    <view class="zigzag-divider"></view>
+    <view class="receipt-footer flex-between">
+      <text class="footer-tip">大学教务处 · 暑假生活品行评估组</text>
+      <text class="footer-time">{{ currentDate }}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮流 -->
+  <view class="action-zone">
+    <button class="clean-share-button" open-type="share">
+      <view class="brutal-box brutal-btn-active action-view-btn share-btn flex-center">
+        <text class="btn-inner-text">炫耀我的暑假生存战报</text>
+      </view>
+    </button>
+
+    <view class="sub-btn-group flex-between">
+      <view class="brutal-box brutal-btn-active sub-view-btn yellow-btn flex-center" bindtap="restartGame">
+        <text class="btn-inner-text">再重开一次</text>
+      </view>
+      <!-- 🌟 确保此处没有多余拦截，直接触发 navToCollection -->
+      <view class="brutal-box brutal-btn-active sub-view-btn teal-btn flex-center" catchtap="navToCollection">
+        <text class="btn-inner-text">查看回忆图鉴</text>
+      </view>
+    </view>
+
+    <view class="brutal-box brutal-btn-active home-view-btn flex-center" catchtap="backHome">
+      <text class="btn-inner-text">返回主界面</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,88 @@
+<!-- pages/ranking/ranking.wxml -->
+<view class="rank-container page-anim-enter">
+  <!-- 顶部天梯榜旗帜横幅 -->
+  <view class="rank-hero brutal-box">
+    <view class="hero-top flex-between">
+      <view class="grade-badge-pill">SUMMER VACATION</view>
+      <text class="hero-time">实时每小时更新</text>
+    </view>
+    <view class="hero-title">大学生天梯榜</view>
+    <text class="hero-desc">全校脆皮大学生的战绩交锋！谁能在老妈拖把与科目二之间生存到开学？</text>
+
+    <!-- 榜单类型切换滑动条：完整补齐所有 7 个项目 -->
+    <view class="tab-control-wrap">
+      <scroll-view scroll-x="true" class="tab-scroll" enable-flex="true">
+        <view 
+          class="tab-btn {{ activeTab === 'survival' ? 'active' : '' }}" 
+          bindtap="switchTab" 
+          data-tab="survival">生存天数</view>
+        <view 
+          class="tab-btn {{ activeTab === 'drive' ? 'active' : '' }}" 
+          bindtap="switchTab" 
+          data-tab="drive">科二车神</view>
+        <view 
+          class="tab-btn {{ activeTab === 'sneak' ? 'active' : '' }}" 
+          bindtap="switchTab" 
+          data-tab="sneak">夜爬潜行</view>
+        <view 
+          class="tab-btn {{ activeTab === 'rush' ? 'active' : '' }}" 
+          bindtap="switchTab" 
+          data-tab="rush">12306抢票</view>
+        <view 
+          class="tab-btn {{ activeTab === 'pack' ? 'active' : '' }}" 
+          bindtap="switchTab" 
+          data-tab="pack">行李箱收纳</view>
+        <view 
+          class="tab-btn {{ activeTab === 'schedule' ? 'active' : '' }}" 
+          bindtap="switchTab" 
+          data-tab="schedule">作息消除</view>
+        <view 
+          class="tab-btn {{ activeTab === 'multitask' ? 'active' : '' }}" 
+          bindtap="switchTab" 
+          data-tab="multitask">多线程分心</view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 核心排行榜列表 -->
+  <view class="rank-list">
+    <block wx:for="{{ currentList }}" wx:key="rank">
+      <view class="rank-card brutal-box flex-between {{ item.isSelf ? 'self-card' : '' }} {{ index < 3 ? 'top-three' : '' }}">
+        <!-- 排名徽章 -->
+        <view class="rank-num-wrap flex-center">
+          <text class="rank-num rank-num-{{ item.rank }}">{{ item.rank <= 3 ? ['🥇','🥈','🥉'][item.rank - 1] : item.rank }}</text>
+        </view>
+
+        <!-- 选手档案与幽默称号 -->
+        <view class="player-info flex-column">
+          <view class="player-header flex-between">
+            <text class="player-name">{{ item.name }}</text>
+            <view class="brutal-badge-mini">{{ item.dept }}</view>
+          </view>
+          <text class="player-motto">“{{ item.motto }}”</text>
+        </view>
+
+        <!-- 得分显示 -->
+        <view class="score-box flex-column flex-center">
+          <text class="score-val">{{ item.score }}</text>
+          <text class="score-unit">{{ scoreUnit }}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部固定：玩家本人成绩铆钉卡片 -->
+  <view class="my-rank-fixed brutal-box flex-between">
+    <view class="my-meta flex-between">
+      <view class="my-avatar flex-center">🙋‍♂️</view>
+      <view class="my-text-col flex-column">
+        <text class="my-title">我的当前最高战报</text>
+        <text class="my-status">全校前 18% · 优秀特种兵</text>
+      </view>
+    </view>
+    <view class="my-score-col flex-column">
+      <text class="my-val">{{ myScore }} <text class="my-unit">{{ scoreUnit }}</text></text>
+      <text class="my-pos">当前位列第 {{ myRank }} 名</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,247 @@
+.home-wrapper {
+  min-height: 100vh;
+  padding: 24rpx 32rpx 180rpx; /* 为自定义底部 TabBar 预留安全底部内边距 */
+  box-sizing: border-box;
+}
+
+.top-nav-bar {
+  margin-bottom: 24rpx;
+}
+.campus-logo {
+  padding: 10rpx 20rpx;
+  border-radius: 99rpx;
+}
+.logo-emoji {
+  font-size: 24rpx;
+  margin-right: 8rpx;
+}
+.logo-text {
+  font-size: 20rpx;
+  font-weight: 900;
+  letter-spacing: 1rpx;
+}
+
+.night-toggle-btn {
+  padding: 10rpx 24rpx;
+  border-radius: 99rpx;
+  background-color: #FFED66;
+}
+.theme-dark .night-toggle-btn {
+  background-color: #8E7DBE !important;
+}
+.toggle-icon { font-size: 24rpx; margin-right: 8rpx; }
+.toggle-text {
+  font-size: 20rpx;
+  font-weight: 800;
+}
+
+.hero-stage {
+  padding: 36rpx 30rpx;
+  margin-bottom: 28rpx;
+  background-color: #FFFFFF;
+}
+.washi-tape-top {
+  position: absolute;
+  top: -12rpx;
+  left: 35%;
+  width: 140rpx;
+  height: 24rpx;
+  background-color: #FFED66;
+  border: 2rpx dashed #1C1917;
+}
+
+.hero-top-row {
+  margin-bottom: 20rpx;
+}
+.day-cycle-badge {
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #78716C;
+}
+
+.title-wrap {
+  margin-bottom: 14rpx;
+}
+.title-sub {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #FF5353;
+  display: block;
+}
+.title-main {
+  font-size: 56rpx;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #1C1917;
+  display: block;
+}
+.theme-dark .title-main {
+  color: #FFFFFF !important;
+}
+
+.hero-quote {
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #78716C;
+  margin-bottom: 28rpx;
+  display: block;
+}
+
+.hero-meter-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #F4EFE6;
+  border: 3rpx solid #1C1917;
+  border-radius: 16rpx;
+  padding: 18rpx 10rpx;
+}
+.theme-dark .hero-meter-grid {
+  background-color: #141518 !important;
+  border-color: #4A5060 !important;
+}
+.meter-item {
+  flex: 1;
+  align-items: center;
+}
+.meter-val {
+  font-size: 32rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.theme-dark .meter-val {
+  color: #FFFFFF !important;
+}
+.meter-lbl {
+  font-size: 18rpx;
+  color: #78716C;
+  font-weight: 700;
+  margin-top: 4rpx;
+}
+.meter-line {
+  width: 3rpx;
+  height: 44rpx;
+  background-color: #1C1917;
+  opacity: 0.2;
+}
+
+.main-action-wrap {
+  margin-bottom: 28rpx;
+}
+.start-btn {
+  background-color: #FF5353 !important;
+  border-color: #1C1917 !important;
+  padding: 28rpx 32rpx;
+}
+.btn-title {
+  font-size: 36rpx;
+  font-weight: 900;
+  color: #FFFFFF !important;
+  letter-spacing: 1rpx;
+}
+.btn-subtitle {
+  font-size: 22rpx;
+  color: #FFE5E5 !important;
+  font-weight: 700;
+  margin-top: 6rpx;
+}
+.btn-arrow-circle {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 4rpx solid #1C1917;
+}
+.arrow-text {
+  color: #1C1917 !important;
+  font-size: 36rpx;
+  font-weight: 900;
+}
+
+/* 🌟 高光质感双色圆角长方形 UI 胶囊 */
+.glossy-capsule-row {
+  gap: 18rpx;
+  margin-bottom: 36rpx;
+}
+.glossy-pill-card {
+  flex: 1;
+  padding: 20rpx 20rpx;
+  border-radius: 20rpx;
+  position: relative;
+  overflow: hidden;
+}
+.pill-settings {
+  background: linear-gradient(135deg, #EBF8FF 0%, #D8EEF9 100%) !important;
+  border-left: 10rpx solid #00CECB !important;
+}
+.pill-about {
+  background: linear-gradient(135deg, #FAF5FF 0%, #F1E7FE 100%) !important;
+  border-left: 10rpx solid #9D4EDD !important;
+}
+.theme-dark .pill-settings {
+  background: #1C242B !important;
+}
+.theme-dark .pill-about {
+  background: #251E2E !important;
+}
+
+/* 仿高光玻璃反光条 */
+.gloss-shine-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+}
+
+.pill-left {
+  gap: 12rpx;
+}
+.pill-icon-wrap {
+  width: 58rpx;
+  height: 58rpx;
+  background-color: #FFFFFF;
+  border: 3rpx solid #1C1917;
+  border-radius: 14rpx;
+  box-shadow: 2rpx 2rpx 0rpx #1C1917;
+}
+.pill-icon {
+  font-size: 30rpx;
+}
+.pill-title {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.theme-dark .pill-title {
+  color: #FFFFFF !important;
+}
+.pill-desc {
+  font-size: 18rpx;
+  color: #78716C;
+  font-weight: 700;
+}
+.pill-arrow {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #1C1917;
+}
+.theme-dark .pill-arrow {
+  color: #FFFFFF !important;
+}
+
+.footer-sign {
+  text-align: center;
+  margin-top: 10rpx;
+}
+.sign-top {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #78716C;
+}
+.sign-bottom {
+  font-size: 16rpx;
+  color: #A8A29E;
+  margin-top: 6rpx;
+}

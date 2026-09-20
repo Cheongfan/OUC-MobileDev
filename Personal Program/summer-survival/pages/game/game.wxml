@@ -1,0 +1,274 @@
+<!-- pages/game/game.wxml -->
+<view class="game-viewport {{ isNight ? 'theme-dark' : 'theme-light' }}">
+  <!-- 1. 顶部：60 天全景进程标尺 -->
+  <view class="timeline-bar-wrap brutal-box">
+    <view class="timeline-header flex-between">
+      <view class="flex-center">
+        <text class="timeline-pulse-dot"></text>
+        <text class="timeline-title">📍 暑假生存进程</text>
+      </view>
+      <view class="flex-center" style="gap: 12rpx;">
+        <text class="dev-test-pill" bindtap="openGlobalTestMenu">【测试】选游戏</text>
+        <text class="timeline-counter">DAY {{ currentDay }} / 60</text>
+      </view>
+    </view>
+    <view class="progress-track-outer">
+      <view class="progress-track-inner" style="{{ timelineStyle }}"></view>
+      <!-- 严格等间距排布的 4 个事件节点 -->
+      <text class="flag-milestone flag-15 {{ currentDay >= 15 ? 'active' : '' }}">科二</text>
+      <text class="flag-milestone flag-30 {{ currentDay >= 30 ? 'active' : '' }}">泰山</text>
+      <text class="flag-milestone flag-45 {{ currentDay >= 45 ? 'active' : '' }}">随机</text>
+      <text class="flag-milestone flag-60 {{ currentDay >= 60 ? 'active' : '' }}">开学</text>
+    </view>
+  </view>
+
+  <!-- 2. 四维体征全息指示舱（优化宽度比例，防止“妈见打指数”过长换行） -->
+  <view class="status-hud brutal-box flex-between">
+    <!-- 精力 -->
+    <view class="hud-item flex-column">
+      <view class="hud-top flex-between">
+        <text class="hud-icon">🔋</text>
+        <text class="hud-val">{{ stats.stamina }}</text>
+      </view>
+      <view class="hud-bar"><view class="hud-fill bar-stamina" style="{{ staminaStyle }}"></view></view>
+      <text class="hud-name">精力</text>
+      <text class="delta-chip {{ previewDiff.stamina > 0 ? 'up' : 'down' }}" wx:if="{{ previewDiff.stamina }}">
+        {{ previewDiff.stamina > 0 ? '+' + previewDiff.stamina : previewDiff.stamina }}
+      </text>
+    </view>
+
+    <!-- 钱包 -->
+    <view class="hud-item flex-column">
+      <view class="hud-top flex-between">
+        <text class="hud-icon">💸</text>
+        <text class="hud-val">{{ stats.money }}</text>
+      </view>
+      <view class="hud-bar"><view class="hud-fill bar-money" style="{{ moneyStyle }}"></view></view>
+      <text class="hud-name">钱包</text>
+      <text class="delta-chip {{ previewDiff.money > 0 ? 'up' : 'down' }}" wx:if="{{ previewDiff.money }}">
+        {{ previewDiff.money > 0 ? '+' + previewDiff.money : previewDiff.money }}
+      </text>
+    </view>
+
+    <!-- 精神 -->
+    <view class="hud-item flex-column">
+      <view class="hud-top flex-between">
+        <text class="hud-icon">🧠</text>
+        <text class="hud-val">{{ stats.sanity }}</text>
+      </view>
+      <view class="hud-bar"><view class="hud-fill bar-sanity" style="{{ sanityStyle }}"></view></view>
+      <text class="hud-name">精神</text>
+      <text class="delta-chip {{ previewDiff.sanity > 0 ? 'up' : 'down' }}" wx:if="{{ previewDiff.sanity }}">
+        {{ previewDiff.sanity > 0 ? '+' + previewDiff.sanity : previewDiff.sanity }}
+      </text>
+    </view>
+
+    <!-- 妈见打指数（加大宽度分配权重，确保同行不换行） -->
+    <view class="hud-item flex-column hud-item-rage">
+      <view class="hud-top flex-between">
+        <text class="hud-icon">⚡</text>
+        <text class="hud-val {{ stats.rage > 70 ? 'danger-blink' : '' }}">{{ stats.rage }}</text>
+      </view>
+      <view class="hud-bar"><view class="hud-fill bar-rage" style="{{ rageStyle }}"></view></view>
+      <text class="hud-name">妈见打指数</text>
+      <text class="delta-chip {{ previewDiff.rage > 0 ? 'down' : 'up' }}" wx:if="{{ previewDiff.rage }}">
+        {{ previewDiff.rage > 0 ? '+' + previewDiff.rage : previewDiff.rage }}
+      </text>
+    </view>
+  </view>
+
+  <!-- 3. 卡牌舞台 -->
+  <view class="card-stage-container">
+    <view 
+      class="card-entity brutal-box dye-theme-{{ currentCard.tagType || 'red' }} {{ isCardEntering ? 'card-anim-enter' : '' }}"
+      style="transform: translate({{ cardTransform.x }}rpx, {{ cardTransform.y }}rpx) rotate({{ cardTransform.rotate }}deg);"
+      bindtouchstart="onTouchStart"
+      bindtouchmove="onTouchMove"
+      bindtouchend="onTouchEnd">
+
+      <view class="card-tape-deco"></view>
+
+      <view class="dye-paint-banner flex-between">
+        <view class="dye-tag-text flex-center">
+          <text class="tag-dot"></text>
+          <text>{{ currentCard.categoryTag || '暑假突发' }}</text>
+        </view>
+        <view class="card-serial">NO.{{ currentCard.id }}</view>
+      </view>
+
+      <view class="stamp-badge stamp-left" style="opacity: {{ leftOpacity }};">
+        {{ currentCard.left.text }}
+      </view>
+      <view class="stamp-badge stamp-right" style="opacity: {{ rightOpacity }};">
+        {{ currentCard.right.text }}
+      </view>
+
+      <view class="ai-verdict-stamp {{ verdictStamp.passed ? 'stamp-ai-pass' : 'stamp-ai-fail' }}" wx:if="{{ showVerdictStamp }}">
+        {{ verdictStamp.title }}
+      </view>
+
+      <view class="card-header-group">
+        <text class="character-title">{{ currentCard.character }}</text>
+        <text class="incident-name">{{ currentCard.title }}</text>
+      </view>
+
+      <view class="art-frame-box flex-center">
+        <view class="emoji-halo-ring"></view>
+        <text class="art-emoji-stage">{{ cardEmoji }}</text>
+      </view>
+
+      <view class="story-bubble">
+        <text class="story-quote-mark">“</text>
+        <text class="story-text">{{ currentCard.desc }}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3.5 自由辩解悬浮高光胶囊 -->
+  <view class="ai-bargain-trigger brutal-box brutal-btn-active flex-between" bindtap="openAIDrawer">
+    <view class="trigger-left flex-center">
+      <div class="spark-icon flex-center"><text>🤖</text></div>
+      <view class="trigger-text-col flex-column">
+        <text class="trigger-title">急中生智 · 自由辩解博弈</text>
+        <text class="trigger-sub">向裁判阐述理由，扭转四维数值</text>
+      </view>
+    </view>
+    <view class="trigger-badge flex-center">
+      <text class="badge-dot-live"></text>
+      <text class="badge-text">在线裁判</text>
+    </view>
+  </view>
+
+  <!-- 4. 底部决策按键 -->
+  <view class="decision-dock flex-between">
+    <view class="choice-panel choice-left brutal-box brutal-btn-active flex-column" bindtap="chooseLeft">
+      <view class="choice-title-row">
+        <text class="direction-arrow">◀</text>
+        <text class="choice-main-text">{{ currentCard.left.text }}</text>
+      </view>
+      <view class="impact-preview-tags">
+        <text class="preview-pill" wx:for="{{ currentCard.left.hints }}" wx:key="index">{{ item }}</text>
+      </view>
+    </view>
+
+    <view class="choice-panel choice-right brutal-box brutal-btn-active flex-column" bindtap="chooseRight">
+      <view class="choice-title-row">
+        <text class="choice-main-text">{{ currentCard.right.text }}</text>
+        <text class="direction-arrow">▶</text>
+      </view>
+      <view class="impact-preview-tags">
+        <text class="preview-pill" wx:for="{{ currentCard.right.hints }}" wx:key="index">{{ item }}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5. 自由辩解终端抽屉 -->
+  <view class="ai-drawer-mask flex-column" wx:if="{{ isAIDrawerOpen }}">
+    <view class="ai-drawer-card brutal-box flex-column">
+      <view class="drawer-pull-bar"></view>
+
+      <view class="drawer-header flex-between">
+        <view class="drawer-title flex-center">
+          <div class="terminal-badge flex-center"><text>🎙️</text></div>
+          <view class="flex-column">
+            <text class="drawer-title-txt">急中生智 · 自由辩解终端</text>
+            <text class="drawer-sub-txt">REAL-TIME VERDICT TERMINAL</text>
+          </view>
+        </view>
+        <view class="drawer-close-btn brutal-box brutal-btn-active flex-center" bindtap="closeAIDrawer">
+          <text>✕</text>
+        </view>
+      </view>
+
+      <view class="judge-target-board flex-between">
+        <text class="judge-role-tag">审判官: {{ currentCard.character }}</text>
+        <div class="model-badge-chip flex-center">
+          <text class="green-live-light"></text>
+          <text>在线裁判引擎</text>
+        </div>
+      </view>
+
+      <view class="preset-chips-scroll flex-between">
+        <block wx:for="{{ currentPresets }}" wx:key="index">
+          <view class="preset-chip brutal-box brutal-btn-active flex-center" bindtap="usePresetText" data-text="{{ item }}">
+            <text class="preset-text">{{ item }}</text>
+          </view>
+        </block>
+      </view>
+
+      <view class="input-container brutal-box">
+        <textarea 
+          class="bargain-textarea" 
+          placeholder="老实交代或者自由辩解吧！例如：“妈！我这是在做空气流通除菌实验…”" 
+          value="{{ bargainInput }}" 
+          maxlength="120"
+          bindinput="onBargainInput"
+          disabled="{{ isAISubmitting }}" />
+        <view class="char-count-line">{{ bargainInput.length }}/120</view>
+      </view>
+
+      <view class="crt-monitor-box brutal-box {{ aiVerdictData ? 'has-verdict' : '' }}">
+        <view class="terminal-bar flex-between">
+          <view class="mac-dots flex-center">
+            <text class="mac-dot red-dot"></text>
+            <text class="mac-dot yellow-dot"></text>
+            <text class="mac-dot green-dot"></text>
+            <text class="console-label">VERDICT_CONSOLE</text>
+          </view>
+          <text class="terminal-stream-dot {{ isStreaming ? 'pulse-green' : '' }}"></text>
+        </view>
+
+        <view class="terminal-content">
+          <text class="ai-speech-text">{{ aiSpeechOutput || 'SYS_READY // 请陈述理由后点击提交...' }}</text>
+          <text class="typing-cursor" wx:if="{{ isStreaming }}">▋</text>
+        </view>
+
+        <view class="verdict-metrics-row flex-between" wx:if="{{ aiVerdictData }}">
+          <view class="metric-title-badge flex-center">
+            <text class="title-star">⭐</text>
+            <text class="metric-tag">{{ aiVerdictData.title }}</text>
+          </view>
+          <div class="metric-diffs">
+            <text class="diff-chip {{ aiVerdictData.stamina >= 0 ? 'up' : 'down' }}">🔋{{ aiVerdictData.stamina > 0 ? '+' : '' }}{{ aiVerdictData.stamina }}</text>
+            <text class="diff-chip {{ aiVerdictData.money >= 0 ? 'up' : 'down' }}">💸{{ aiVerdictData.money > 0 ? '+' : '' }}{{ aiVerdictData.money }}</text>
+            <text class="diff-chip {{ aiVerdictData.sanity >= 0 ? 'up' : 'down' }}">🧠{{ aiVerdictData.sanity > 0 ? '+' : '' }}{{ aiVerdictData.sanity }}</text>
+            <text class="diff-chip {{ aiVerdictData.momRage > 0 ? 'down' : 'up' }}">⚡{{ aiVerdictData.momRage > 0 ? '+' : '' }}{{ aiVerdictData.momRage }}</text>
+          </div>
+        </view>
+      </view>
+
+      <view class="drawer-action-row flex-between">
+        <div 
+          class="brutal-btn-drawer submit-btn brutal-box brutal-btn-active flex-center {{ isAISubmitting ? 'btn-disabled' : '' }}" 
+          bindtap="submitBargain">
+          <text class="btn-text">{{ isAISubmitting ? '⚡ 审判推演中...' : '🚀 提交辩解' }}</text>
+        </div>
+        <div 
+          class="brutal-btn-drawer accept-btn brutal-box brutal-btn-active flex-center {{ !aiVerdictData ? 'btn-disabled' : '' }}" 
+          bindtap="acceptVerdict">
+          <text class="btn-text">✅ 接受裁决并推进</text>
+        </div>
+      </view>
+    </view>
+  </view>
+
+  <view class="milestone-modal-mask flex-center" wx:if="{{ activeMilestone }}">
+    <view class="milestone-card brutal-box flex-column">
+      <view class="milestone-badge-top">{{ activeMilestone.badge }}</view>
+      <text class="milestone-title">{{ activeMilestone.title }}</text>
+      <view class="milestone-icon-wrap flex-center brutal-box">
+        <text class="milestone-big-emoji">{{ activeMilestone.icon }}</text>
+      </view>
+      <text class="milestone-desc">{{ activeMilestone.desc }}</text>
+      <view class="milestone-reward-tip">🏆 挑战战果：通关即可扭转四维危机！</view>
+      <view class="milestone-btn-group flex-between">
+        <view class="milestone-btn skip-btn brutal-box brutal-btn-active flex-center" bindtap="skipMilestone">
+          <text class="btn-txt">认怂逃避 (体力-20)</text>
+        </view>
+        <view class="milestone-btn enter-btn brutal-box brutal-btn-active flex-center" bindtap="enterMilestoneArcade">
+          <text class="btn-txt">🔥 前往迎战！</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

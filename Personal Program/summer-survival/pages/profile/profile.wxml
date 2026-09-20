@@ -1,0 +1,95 @@
+<!-- pages/profile/profile.wxml -->
+<view class="profile-page page-anim-enter">
+  <!-- 1. 个人信息卡片 -->
+  <view class="passport-card brutal-box">
+    <view class="passport-header flex-between">
+      <text class="passport-tag">SUMMER IDENTITY PASS</text>
+      <text class="grade-badge-pill">官方认证特种兵</text>
+    </view>
+
+    <!-- 个人信息行：点击头像或未登录时可触发虚假微信授权弹窗登录 -->
+    <view class="profile-row flex-between">
+      <view class="avatar-box flex-center brutal-box" bindtap="handleWechatLogin">
+        <text class="avatar-emoji">{{ userInfo.isLoggedIn ? '🏄‍♂️' : '👤' }}</text>
+      </view>
+      <view class="identity-info flex-column">
+        <view class="name-settings-row flex-between">
+          <text class="user-nickname" bindtap="handleWechatLogin">{{ userInfo.nickName }}</text>
+          <view class="gear-settings-btn brutal-box brutal-btn-active flex-center" bindtap="navTo" data-url="/pages/settings/settings">
+            <text class="gear-icon">⚙️</text>
+          </view>
+        </view>
+        <text class="user-id">学号: 2026-SURVIVE-008</text>
+        <view class="title-pill" bindtap="handleWechatLogin">专业：{{ userInfo.major }} ({{ userInfo.isLoggedIn ? '已微信授权' : '点击登录' }})</view>
+      </view>
+    </view>
+
+    <!-- 荣誉称号收集墙（“苟活”修正为“生存”） -->
+    <view class="badge-wall">
+      <view class="wall-title">🎖️ 暑假战备勋章</view>
+      <view class="badge-grid">
+        <view class="badge-chip {{ stats.maxDays >= 10 ? 'unlocked' : '' }}">
+          <text class="chip-icon">🚗</text>
+          <text class="chip-text">科二幸存者</text>
+        </view>
+        <view class="badge-chip {{ stats.maxDays >= 30 ? 'unlocked' : '' }}">
+          <text class="chip-icon">🧗</text>
+          <text class="chip-text">夜爬泰山硬汉</text>
+        </view>
+        <view class="badge-chip {{ stats.maxDays >= 60 ? 'unlocked' : '' }}">
+          <text class="chip-icon">👑</text>
+          <text class="chip-text">天选开学生还者</text>
+        </view>
+        <view class="badge-chip {{ stats.unlockedCount >= 3 ? 'unlocked' : '' }}">
+          <text class="chip-icon">📖</text>
+          <text class="chip-text">奇葩死因收藏家</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 历史统计看板（“苟活”修正为“生存”） -->
+  <view class="stats-panel brutal-box">
+    <view class="panel-title">📊 生存档案总汇</view>
+    <view class="panel-grid">
+      <view class="stat-col flex-column flex-center">
+        <text class="stat-val">{{ stats.totalRuns }}</text>
+        <text class="stat-lbl">重开轮回</text>
+      </view>
+      <view class="stat-col flex-column flex-center">
+        <text class="stat-val">{{ stats.maxDays }} 天</text>
+        <text class="stat-lbl">最长生存</text>
+      </view>
+      <view class="stat-col flex-column flex-center">
+        <text class="stat-val">{{ stats.unlockedCount }} 款</text>
+        <text class="stat-lbl">结局解锁</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3. “关于作者”独立专区：文案更新 -->
+  <view class="about-author-section">
+    <view class="about-section-header flex-between">
+      <text class="about-sec-title">📌 关于作者 & 结课致谢</text>
+      <text class="about-sec-tag">开源仓库直通</text>
+    </view>
+    <view class="about-special-card brutal-box brutal-btn-active flex-between" bindtap="navTo" data-url="/pages/about/about">
+      <view class="about-special-left flex-center">
+        <view class="about-avatar-bubble flex-center">
+          <text class="about-emoji">🧑‍💻</text>
+        </view>
+        <view class="about-text-col flex-column">
+          <text class="about-main-name">项目作者名片</text>
+          <text class="about-sub-tip">点击查阅结课致谢信 · 访问开源仓库与博客</text>
+        </view>
+      </view>
+      <view class="about-arrow-badge flex-center">
+        <text class="arrow-glyph">→</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-sign flex-center flex-column">
+    <text class="sign-top">“每一张被老妈收走的手机，都曾照亮过盛夏的被窝”</text>
+  </view>
+</view>

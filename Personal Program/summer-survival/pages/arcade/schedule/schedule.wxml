@@ -1,0 +1,132 @@
+<!-- pages/arcade/schedule/schedule.wxml -->
+<view class="schedule-viewport flex-column">
+  <view class="score-hud brutal-box flex-between">
+    <view class="score-info flex-column">
+      <text class="score-label">作息规律指数</text>
+      <text class="score-digits">{{ totalScore }}</text>
+    </view>
+    <view class="combo-pill flex-center {{ comboCount > 1 ? 'combo-fire' : '' }}">
+      <text class="combo-icon">⚡</text>
+      <text class="combo-text">COMBO x{{ comboCount }}</text>
+    </view>
+    <view class="sanity-col flex-column flex-center">
+      <text class="sanity-percent">{{ sanity }}%</text>
+      <text class="sanity-name">清醒状态</text>
+      <view class="sanity-track">
+        <view class="sanity-fill" style="{{ sanityFillStyle }}"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="routine-banner brutal-box flex-between">
+    <view class="banner-left flex-center">
+      <text class="banner-emoji">{{ statusEmoji }}</text>
+      <text class="banner-msg">{{ statusMsg }}</text>
+    </view>
+    <text class="line-cleared-tag">已消除: {{ linesCleared }} 行列</text>
+  </view>
+
+  <view class="clock-matrix-stage flex-center">
+    <view class="board-casing brutal-box">
+      <view class="time-header-row flex-between">
+        <text class="th-label">00:00</text>
+        <text class="th-label">08:00</text>
+        <text class="th-label">12:00</text>
+        <text class="th-label">18:00</text>
+        <text class="th-label">24:00</text>
+      </view>
+
+      <view class="grid-board">
+        <block wx:for="{{ gridRows }}" wx:for-item="row" wx:for-index="rIndex" wx:key="rIndex">
+          <view class="grid-row flex-between">
+            <block wx:for="{{ row }}" wx:for-item="cell" wx:for-index="cIndex" wx:key="cIndex">
+              <view 
+                class="grid-cell flex-center {{ cell.filled ? 'cell-occupied cell-' + cell.color : '' }} {{ (previewR === cell.r && previewC === cell.c) ? 'cell-preview' : '' }}"
+                bindtap="onCellTap" 
+                data-r="{{ cell.r }}" 
+                data-c="{{ cell.c }}">
+                <text class="cell-icon" wx:if="{{ cell.filled && cell.isAnchor }}">{{ cell.emoji }}</text>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="dock-selection-area brutal-box flex-column">
+    <view class="dock-header flex-between">
+      <text class="dock-title">📋 待安排的暑假活动 (点击选择，再点棋盘摆放)</text>
+      <text class="dock-tip">满整行或整列自动消除</text>
+    </view>
+    
+    <view class="dock-slots-row flex-between">
+      <block wx:for="{{ candidateSlots }}" wx:key="id">
+        <view 
+          class="slot-card brutal-box flex-column flex-center {{ item.placed ? 'slot-empty' : '' }} {{ selectedSlotIndex === index ? 'slot-active' : '' }}"
+          bindtap="onSelectCandidate" 
+          data-index="{{ index }}">
+          <block wx:if="{{ !item.placed }}">
+            <text class="slot-emoji">{{ item.emoji }}</text>
+            <text class="slot-name">{{ item.name }}</text>
+            <view class="mini-shape-grid flex-column flex-center">
+              <block wx:for="{{ item.shape }}" wx:for-item="sRow" wx:key="index">
+                <view class="mini-row flex-center">
+                  <block wx:for="{{ sRow }}" wx:for-item="dot" wx:key="index">
+                    <view class="mini-dot {{ dot === 1 ? 'dot-on dot-' + item.color : 'dot-off' }}"></view>
+                  </block>
+                </view>
+              </block>
+            </view>
+          </block>
+          <block wx:else>
+            <text class="empty-text">已安排</text>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 底部操作栏：主游戏进入时显示“结束规划”，街机厅自由进入时显示“重置今日作息” -->
+  <view class="action-footer flex-between">
+    <button class="brutal-btn submit-day-btn" bindtap="triggerActiveSettle" wx:if="{{ fromMain }}" style="width: 100% !important; background-color: #06D6A0 !important; color: #1C1917 !important;">
+      🏁 结束规划并结算战果
+    </button>
+    <button class="brutal-btn restart-btn" bindtap="restartGame" wx:else style="width: 100% !important;">
+      🔄 重置今日作息
+    </button>
+  </view>
+
+  <view class="collapse-modal-mask flex-center" wx:if="{{ isGameOver }}">
+    <view class="collapse-dialog brutal-box flex-column flex-center">
+      <text class="collapse-title">🚨 作息统计结算完成！</text>
+      <view class="collapse-icon-box flex-center">
+        <text class="collapse-emoji">✨</text>
+      </view>
+      <text class="collapse-verdict">{{ gameOverVerdict }}</text>
+      <view class="collapse-stats-box flex-between">
+        <view class="st-cell flex-column">
+          <text class="st-val">{{ totalScore }}</text>
+          <text class="st-lbl">最终总积分</text>
+        </view>
+        <view class="st-cell flex-column">
+          <text class="st-val">{{ linesCleared }}</text>
+          <text class="st-lbl">消除时段数</text>
+        </view>
+        <view class="st-cell flex-column">
+          <text class="st-val">x{{ maxCombo }}</text>
+          <text class="st-lbl">最高连消</text>
+        </view>
+      </view>
+      
+      <view class="flex-column" style="width: 100%; gap: 10rpx;">
+        <view  wx:if="{{ rewardSummary }}" class="reward-success-box" style="width: 100%; text-align: center; display: block;">
+          {{ rewardSummary }}
+        </view >
+        <button class="brutal-btn brutal-btn-primary modal-play-again-btn" bindtap="confirmAndReturn">
+          {{ fromMain ? '🏆 确认战果并返回主线' : '🔄 重新开始排班' }}
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

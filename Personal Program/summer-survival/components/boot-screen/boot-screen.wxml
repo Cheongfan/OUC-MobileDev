@@ -1,0 +1,17 @@
+<view class="boot-container {{ isBooting ? '' : 'boot-fade-out' }}" wx:if="{{ isVisible }}" bindtap="skipBoot">
+  <view class="crt-scanline"></view>
+  
+  <view class="boot-content flex-center flex-column">
+    <view class="cassette-icon anim-float">📼</view>
+    <view class="bios-title">CAMPUS CASSETTE OS</view>
+    <view class="bios-sub">SUMMER EDITION 202X · 64K RAM</view>
+
+    <!-- 加载像素步进条 -->
+    <view class="boot-track">
+      <view class="boot-fill" style="width: {{ bootProgress }}%;"></view>
+    </view>
+
+    <view class="boot-log-text">{{ bootLog }}</view>
+    <view class="skip-tip">轻触跳过 ▶</view>
+  </view>
+</view>

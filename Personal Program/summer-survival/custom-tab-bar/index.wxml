@@ -1,0 +1,17 @@
+<view class="tab-bar-container">
+  <view class="tab-bar-border"></view>
+  <view class="tab-bar-body flex-between">
+    <block wx:for="{{ list }}" wx:key="index">
+      <view 
+        class="tab-item flex-column flex-center {{ selected === index ? 'active-item' : '' }}" 
+        bindtap="switchTab" 
+        data-path="{{ item.pagePath }}" 
+        data-index="{{ index }}">
+        <!-- 放大居中的 Icon -->
+        <text class="tab-icon">{{ item.icon }}</text>
+        <!-- 略小居中的文字 -->
+        <text class="tab-label">{{ item.text }}</text>
+      </view>
+    </block>
+  </view>
+</view>

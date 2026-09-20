@@ -1,0 +1,149 @@
+<!-- pages/arcade/pack/pack.wxml -->
+<view class="pack-container flex-column">
+  <view class="mission-hud brutal-box flex-between">
+    <view class="mission-info flex-column">
+      <view class="mission-badge flex-center">
+        <text class="level-num">SCENARIO {{ currentLevel }}</text>
+        <text class="level-title">{{ levelTitle }}</text>
+      </view>
+      <text class="mission-condition">{{ levelGoalDesc }}</text>
+    </view>
+
+    <view class="density-gauge flex-column flex-center">
+      <text class="density-val">{{ densityPercent }}%</text>
+      <text class="density-label">空间利用率</text>
+      <view class="density-track">
+        <view class="density-fill" style="{{ densityFillStyle }}"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="hazard-banner brutal-box flex-between {{ hazardCount > 0 ? 'hazard-active' : '' }}">
+    <view class="hazard-left flex-center">
+      <text class="hazard-icon">{{ hazardCount > 0 ? '⚠️' : '✅' }}</text>
+      <text class="hazard-text">{{ hazardMsg }}</text>
+    </view>
+    <view class="hazard-score flex-column">
+      <text class="hz-score-num">{{ currentBonus >= 0 ? '+' : '' }}{{ currentBonus }}</text>
+      <text class="hz-score-lbl">羁绊加权</text>
+    </view>
+  </view>
+
+  <view class="trunk-stage flex-center">
+    <view class="trunk-casing brutal-box">
+      <view class="corner-lock lock-tl"></view>
+      <view class="corner-lock lock-tr"></view>
+      <view class="corner-lock lock-bl"></view>
+      <view class="corner-lock lock-br"></view>
+      <view class="trunk-handle"></view>
+
+      <view class="grid-matrix">
+        <block wx:for="{{ gridRows }}" wx:for-item="row" wx:for-index="rIndex" wx:key="rIndex">
+          <view class="matrix-row flex-between">
+            <block wx:for="{{ row }}" wx:for-item="cell" wx:for-index="cIndex" wx:key="cIndex">
+              <view 
+                class="matrix-cell flex-center {{ cell.occupied ? 'cell-filled cell-color-' + cell.color : '' }} {{ (cell.r === hoverR && cell.c === hoverC) ? 'cell-hovered' : '' }}"
+                bindtap="onCellTap" 
+                data-r="{{ cell.r }}" 
+                data-c="{{ cell.c }}">
+                <text class="cell-emoji" wx:if="{{ cell.occupied && cell.isRoot }}">{{ cell.emoji }}</text>
+                <div class="cell-block-dot" wx:if="{{ cell.occupied && !cell.isRoot }}"></div>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="control-pod brutal-box flex-between" wx:if="{{ selectedItem }}">
+    <view class="selected-meta flex-center">
+      <view class="selected-icon-bubble flex-center">
+        <text class="sel-emoji">{{ selectedItem.emoji }}</text>
+      </view>
+      <view class="selected-text-col flex-column">
+        <text class="sel-name">{{ selectedItem.name }}</text>
+        <text class="sel-trait">{{ selectedItem.traitDesc }}</text>
+      </view>
+    </view>
+    <view class="pod-actions flex-center">
+      <button class="brutal-btn rotate-btn brutal-btn-active" bindtap="rotateCurrentItem">
+        <text class="rotate-icon">🔄</text>
+        <text class="rotate-text">旋转90°</text>
+      </button>
+      <view class="cancel-btn brutal-box brutal-btn-active flex-center" bindtap="cancelSelection">✕</view>
+    </view>
+  </view>
+
+  <!-- 传送带：修复塌陷并固定高度 -->
+  <view class="conveyor-belt-section">
+    <view class="conveyor-title-row flex-between">
+      <text class="conveyor-title">📦 待装入物品传送带 (点击选取)</text>
+      <text class="conveyor-hint">长按已放入物品可取出</text>
+    </view>
+    <scroll-view scroll-x="true" class="conveyor-scroll" enable-flex="true">
+      <block wx:for="{{ inventoryPool }}" wx:key="id">
+        <view 
+          class="item-card brutal-box flex-column flex-center {{ item.packed ? 'item-packed' : '' }} {{ selectedItem.id === item.id ? 'item-selected' : '' }}"
+          bindtap="selectItemToPack" 
+          data-item="{{ item }}">
+          <text class="card-emoji">{{ item.emoji }}</text>
+          <text class="card-name">{{ item.name }}</text>
+          <div class="shape-indicator-row flex-center">
+            <text class="dim-tag">{{ item.currentShape.length }}x{{ item.currentShape[0].length }}</text>
+          </div>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <!-- 底部安检按钮：未放完时低亮，放完时自动高亮 -->
+  <view class="action-footer flex-between">
+    <button class="brutal-btn clear-btn" bindtap="resetSuitcase">🧹 清空行李箱</button>
+    <button class="brutal-btn submit-btn {{ isAllPacked ? 'brutal-btn-primary anim-pulse btn-ready-highlight' : 'btn-dimmed' }}" bindtap="inspectLuggage">
+      🛫 {{ isAllPacked ? '✨ 完美装箱！出发安检！' : '出发安检结算！' }}
+    </button>
+  </view>
+
+  <view class="inspect-modal-mask flex-center" wx:if="{{ showInspectModal }}">
+    <view class="inspect-dialog brutal-box flex-column">
+      <view class="inspect-header flex-between">
+        <text class="dialog-title">🛡️ 机场 / 高铁安检透视报告</text>
+        <view class="grade-badge-pill stamp-grade-{{ inspectResult.grade }}">{{ inspectResult.grade }}级</view>
+      </view>
+      
+      <view class="xray-screen flex-center flex-column">
+        <text class="xray-emoji">{{ inspectResult.passed ? '🎉' : '🚨' }}</text>
+        <text class="xray-verdict">{{ inspectResult.verdict }}</text>
+      </view>
+
+      <view class="inspect-log-box flex-column">
+        <block wx:for="{{ inspectResult.logs }}" wx:key="index">
+          <text class="log-line {{ item.type === 'danger' ? 'log-danger' : (item.type === 'bonus' ? 'log-bonus' : '') }}">
+            {{ item.msg }}
+          </text>
+        </block>
+        <view class="log-line center-reward-text {{ inspectResult.passed ? 'reward-success-box' : 'reward-fail-box' }}" style="margin-top: 8rpx;">
+          {{ inspectResult.rewardSummary }}
+        </view>
+      </view>
+
+      <view class="dialog-score-row flex-between" style="align-items: center;">
+  <text class="dlg-score-lbl">总分收纳鉴定</text>
+  
+  <!-- 用一个 class 包裹，通过 flex 强制行内居中对齐 -->
+  <view class="flex-center" style="gap: 4rpx;">
+    <text class="dlg-score-val">{{ inspectResult.totalScore }}</text>
+    <text class="dlg-score-unit" style="font-size: 26rpx; font-weight: 900; color: #FF5353; margin-top: 6rpx;">分</text>
+  </view>
+</view>
+
+      <view class="dialog-btn-row flex-between">
+        <button class="brutal-btn modal-btn-retry" bindtap="closeModalAndRetry">🔄 调整重塞</button>
+        <button class="brutal-btn modal-btn-next" bindtap="nextLevelOrFinish">
+          确认战果并返回 🏆
+        </button>
+      </view>
+    </view>
+  </view>
+</view>
